@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1400, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>अगस्त 2026 - सही पंचांग</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --border-color: #444;
+            --bg-paper: #fffef8;
+            --red-header: #b71c1c;
+            --saffron: #ff9800;
+            --text-blue: #0d47a1;
+            --text-red: #d50000;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #424242;
+            font-family: 'Tiro Devanagari Hindi', serif;
+            padding: 20px;
+            min-width: 1400px;
+        }
+
+        .calendar-wrapper {
+            width: 1360px;
+            min-height: 1350px; 
+            margin: 0 auto;
+            background-color: var(--bg-paper);
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+            border: 6px solid #ff6f00;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(to right, #b71c1c, #e65100);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            border-bottom: 6px solid #ffeb3b;
+        }
+
+        .header-left h1 { font-size: 4rem; line-height: 1; text-shadow: 2px 2px 4px #000; margin: 0; font-family: 'Tiro Devanagari Hindi', serif; }
+        .header-left p { color: #fff3e0; font-size: 1.3rem; margin-top: 5px; font-weight: bold; letter-spacing: 1px; }
+
+        .month-circle {
+            background: #fff;
+            color: var(--red-header);
+            padding: 5px 55px;
+            border-radius: 60px;
+            text-align: center;
+            border: 4px solid var(--saffron);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .month-circle h2 { font-size: 3rem; margin: 0; line-height: 1; font-family: 'Oswald', sans-serif; }
+        .month-circle span { font-size: 1.2rem; color: #333; font-weight: bold; }
+
+        .om { font-size: 4.5rem; color: #ffeb3b; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+
+        /* MAIN LAYOUT */
+        .main-container {
+            display: grid;
+            grid-template-columns: 270px 1fr 270px;
+            flex-grow: 1;
+        }
+
+        /* SIDEBARS */
+        .sidebar {
+            background: #fff8e1;
+            border-right: 3px solid #ffcc80;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .sidebar.right { border-right: none; border-left: 3px solid #ffcc80; }
+
+        .box { 
+            border: 1px solid #ff9800; 
+            background: #fff; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .box.fill { flex-grow: 1; }
+
+        .box-head {
+            background: #e65100;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            padding: 6px;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #bf360c;
+        }
+        .box-head.blue { background: #1565c0; border-bottom-color: #0d47a1; }
+        .box-head.red { background: #c62828; border-bottom-color: #b71c1c; }
+        
+        .box-content { padding: 10px; font-size: 0.9rem; line-height: 1.5; color: #222; }
+        
+        .rashi-list { padding: 0; margin: 0; list-style: none; }
+        .rashi-list li { margin-bottom: 5px; border-bottom: 1px dotted #ccc; padding-bottom: 2px; }
+        .rashi-name { font-weight: bold; color: #d84315; }
+
+        /* CALENDAR GRID */
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            /* 6 Lines needed for August 2026 (Starts Saturday) */
+            grid-template-rows: 45px repeat(6, 185px); 
+            background: #ffcc80;
+            gap: 2px;
+            border-bottom: 2px solid #ffcc80;
+        }
+
+        .day-name { background: #3e2723; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold; text-transform: uppercase; }
+        .day-name.sun { background: #d50000; }
+
+        /* DATE CELLS */
+        .date-cell {
+            background: #fff;
+            height: 100%; 
+            padding: 8px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+            overflow: hidden;
+        }
+
+        .date-cell:hover { background: #fff3e0; z-index: 10; border: 1px solid var(--saffron); box-shadow: inset 0 0 10px rgba(255, 167, 38, 0.2); overflow: visible; }
+        .date-cell.sunday { background: #ffcdd2; }
+        .date-cell.holiday { background: #e3f2fd; }
+
+        .num {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #333;
+            text-align: right;
+            line-height: 0.9;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            z-index: 2;
+        }
+        .sunday .num { color: #b71c1c; }
+
+        .events {
+            margin-top: 55px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 5;
+            position: relative;
+        }
+        
+        .evt-row { display: block; margin-top: 4px; line-height: 1.25; border-left: 3px solid transparent; padding-left: 4px; }
+        .evt-row.red-text { border-left-color: #d50000; }
+        .evt-row.blue-text { border-left-color: #0d47a1; }
+        
+        .red-text { color: #d50000; }
+        .blue-text { color: #0d47a1; }
+        .saffron-text { color: #e65100; }
+
+        /* FOOTER */
+        .footer-list {
+            padding: 12px;
+            background: #ffe0b2;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.9rem;
+            border-top: 4px solid #ff9800;
+        }
+        .f-item { border-bottom: 1px dashed #d84315; padding-bottom: 4px; }
+
+        /* Helpers */
+        .tight-text { font-size: 0.85rem; }
+        .highlight-box { background: #fffde7; padding: 2px 5px; border-radius: 3px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="calendar-wrapper">
+        <header>
+            <div class="header-left">
+                <h1>पंचांग - 2026</h1>
+                <p>सनातन धर्म हेतु</p>
+            </div>
+            <div class="month-circle">
+                <h2>अगस्त</h2>
+                <span>2026</span>
+            </div>
+            <div class="om">ॐ</div>
+        </header>
+
+        <div class="main-container">
+            <aside class="sidebar">
+                
+                <div class="box">
+                    <div class="box-head">मास विचार (अगस्त)</div>
+                    <div class="box-content tight-text">
+                        <strong>सूर्य:</strong> 17 अगस्त को सिंह राशि में प्रवेश (सिंह संक्रांति)।<br>
+                        <strong>मास:</strong> श्रावण (1-28 अगस्त) और फिर भाद्रपद (29 अगस्त से)।<br>
+                        <strong>ऋतु:</strong> वर्षा ऋतु (सावन-भादो)।
+                    </div>
+                </div>
+                
+                <div class="box">
+                    <div class="box-head red">रक्षा बंधन मुहूर्त</div>
+                    <div class="box-content tight-text">
+                        <strong>28 अगस्त (शुक्रवार):</strong><br>
+                        पूर्णिमा तिथि व रक्षा बंधन।<br>
+                        <em>भद्रा समाप्ति:</em> सुबह 09:30 बजे के बाद राखी बांधना शुभ रहेगा।
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head blue">सावन के त्यौहार</div>
+                    <div class="box-content tight-text">
+                        इस माह सावन अपने चरम पर होगा।<br>
+                        <strong>16 अगस्त:</strong> हरियाली तीज (सिंजारा)।<br>
+                        <strong>18 अगस्त:</strong> नाग पंचमी।
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head red">सरकारी छुट्टियाँ</div>
+                    <div class="box-content tight-text">
+                        <ul style="padding-left:15px; margin:0; line-height:1.6;">
+                            <li><strong>15 अगस्त:</strong> स्वतंत्रता दिवस (National Holiday)</li>
+                            <li><strong>28 अगस्त:</strong> रक्षा बंधन (Regional)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head blue">वाहन खरीद मुहूर्त</div>
+                    <div class="box-content tight-text">
+                        शुभ मुहूर्त: 3, 7, 10, 14, 21, 24, 28, 31 अगस्त।<br>
+                        <em>(चातुर्मास में भी आवश्यक खरीद की जा सकती है)</em>
+                    </div>
+                </div>
+
+                <div class="box fill">
+                    <div class="box-head red">विशेष योग</div>
+                    <div class="box-content tight-text">
+                        <strong>सर्वार्थ सिद्धि योग:</strong><br>
+                        4, 8, 11, 15, 20, 24, 29 अगस्त।<br>
+                        <br>
+                        <strong>अमृत सिद्धि योग:</strong><br>
+                        15 और 24 अगस्त।
+                    </div>
+                </div>
+            </aside>
+
+            <main class="cal-grid">
+                <div class="day-name sun">रवि</div>
+                <div class="day-name">सोम</div>
+                <div class="day-name">मंगल</div>
+                <div class="day-name">बुध</div>
+                <div class="day-name">गुरु</div>
+                <div class="day-name">शुक्र</div>
+                <div class="day-name">शनि</div>
+
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+
+                <div class="date-cell">
+                    <div class="num">1</div>
+                    <div class="events">
+                        <span class="evt-row">श्रावण कृष्ण तृतीया</span>
+                        <span class="evt-row blue-text">विघ्नराज संकष्टी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday">
+                    <div class="num">2</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण चतुर्थी</span>
+                        <span class="evt-row blue-text">फ्रेंडशिप डे</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">3</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण पंचमी</span>
+                        <span class="evt-row">नाग पंचमी (दक्षिण)</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">4</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण षष्ठी</span>
+                        <span class="evt-row red-text">रांधा छठ</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">5</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण सप्तमी</span>
+                        <span class="evt-row">शीतला सप्तमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">6</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण अष्टमी</span>
+                        <span class="evt-row blue-text">कालाष्टमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">7</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण नवमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">8</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण दशमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday">
+                    <div class="num">9</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण एकादशी</span>
+                        <span class="evt-row red-text">कामिका एकादशी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">10</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण द्वादशी</span>
+                        <span class="evt-row blue-text">सोम प्रदोष व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">11</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण त्रयोदशी</span>
+                        <span class="evt-row">मासिक शिवरात्रि</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#e3f2fd;">
+                    <div class="num">12</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-weight:bold;">श्रावण अमावस्या</span>
+                        <span class="evt-row">हरियाली अमावस्या</span>
+                        <span class="evt-row">स्नान-दान</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">13</div>
+                    <div class="events">
+                        <span class="evt-row">श्रावण शुक्ल प्रतिपदा</span>
+                        <span class="evt-row blue-text">शुक्ल पक्ष शुरू</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">14</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल द्वितीया</span>
+                        <span class="evt-row">सिंजारा</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#fffde7;">
+                    <div class="num">15</div>
+                    <div class="events">
+                        <span class="evt-row blue-text" style="font-weight:bold; font-size:1.1rem;">स्वतंत्रता दिवस</span>
+                        <span class="evt-row">शुक्ल तृतीया</span>
+                        <span class="evt-row red-text">स्वर्ण गौरी व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday holiday" style="background:#fffde7;">
+                    <div class="num">16</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-size:1.2rem; font-weight:bold;">हरियाली तीज</span>
+                        <span class="evt-row">मधुश्रवा तीज</span>
+                        <span class="evt-row blue-text">झूला उत्सव</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">17</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल चतुर्थी</span>
+                        <span class="evt-row red-text">★ सिंह संक्रांति</span>
+                        <span class="evt-row">विनायक चतुर्थी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">18</div>
+                    <div class="events">
+                        <span class="evt-row red-text highlight-box">नाग पंचमी</span>
+                        <span class="evt-row">शुक्ल पंचमी</span>
+                        <span class="evt-row blue-text">कालसर्प पूजा</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">19</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल षष्ठी</span>
+                        <span class="evt-row">कल्कि जयंती</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">20</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल सप्तमी</span>
+                        <span class="evt-row">तुलसीदास जयंती</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">21</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल अष्टमी</span>
+                        <span class="evt-row red-text">वरलक्ष्मी व्रत</span>
+                        <span class="evt-row">दुर्गाष्टमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">22</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल नवमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday">
+                    <div class="num">23</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल दशमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">24</div>
+                    <div class="events">
+                        <span class="evt-row red-text highlight-box">पुत्रदा एकादशी</span>
+                        <span class="evt-row">पवित्रा एकादशी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">25</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल द्वादशी</span>
+                        <span class="evt-row blue-text">भौम प्रदोष</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">26</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल त्रयोदशी</span>
+                        <span class="evt-row">प्रदोष व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">27</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल चतुर्दशी</span>
+                        <span class="evt-row blue-text">सत्यनारायण व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#ffebee;">
+                    <div class="num">28</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-weight:bold; font-size:1.3rem;">रक्षा बंधन</span>
+                        <span class="evt-row">श्रावण पूर्णिमा</span>
+                        <span class="evt-row blue-text">हयग्रीव जयंती</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">29</div>
+                    <div class="events">
+                        <span class="evt-row">भाद्रपद कृष्ण प्रतिपदा</span>
+                        <span class="evt-row">पंचक विचार नहीं</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday">
+                    <div class="num">30</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण द्वितीया</span>
+                        <span class="evt-row blue-text">हिंडोला उत्सव समाप्त</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">31</div>
+                    <div class="events">
+                        <span class="evt-row red-text">कजरी तीज</span>
+                        <span class="evt-row">कृष्ण तृतीया</span>
+                        <span class="evt-row">सातुड़ी तीज (राज.)</span>
+                    </div>
+                </div>
+                
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+
+            </main>
+
+            <aside class="sidebar right">
+                <div class="box">
+                    <div class="box-head">राशिफल (अगस्त 2026)</div>
+                    <div class="box-content">
+                        <ul class="rashi-list" style="padding-left:0; list-style:none; font-size:0.85rem;">
+                            <li><span class="rashi-name">मेष:</span> कार्यक्षेत्र में नई जिम्मेदारी, आय बढ़ेगी।</li>
+                            <li><span class="rashi-name">वृषभ:</span> भूमि-भवन के मामलों में सफलता।</li>
+                            <li><span class="rashi-name">मिथुन:</span> भाई-बहनों से सहयोग (रक्षा बंधन शुभ)।</li>
+                            <li><span class="rashi-name">कर्क:</span> मानसिक शांति, धार्मिक यात्रा योग।</li>
+                            <li><span class="rashi-name">सिंह:</span> सूर्य गोचर से आत्मविश्वास चरम पर।</li>
+                            <li><span class="rashi-name">कन्या:</span> खर्चों पर नियंत्रण जरूरी, सेहत ठीक रहेगी।</li>
+                            <li><span class="rashi-name">तुला:</span> आय के नए स्त्रोत, प्रेम संबंध मजबूत।</li>
+                            <li><span class="rashi-name">वृश्चिक:</span> नौकरी में पदोन्नति की संभावना।</li>
+                            <li><span class="rashi-name">धनु:</span> भाग्य का साथ, विद्यार्थियों के लिए शुभ।</li>
+                            <li><span class="rashi-name">मकर:</span> सेहत का ध्यान रखें, वाहन धीमे चलाएं।</li>
+                            <li><span class="rashi-name">कुंभ:</span> दांपत्य जीवन में खुशहाली, व्यापार लाभ।</li>
+                            <li><span class="rashi-name">मीन:</span> शत्रु परास्त, कानूनी मामलों में राहत।</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="box">
+                    <div class="box-head blue">सावन सोमवार</div>
+                    <div class="box-content tight-text">
+                        अगस्त में सावन के सोमवार व्रत:<br>
+                        <strong>3 अगस्त, 10 अगस्त, 17 अगस्त, 24 अगस्त।</strong><br>
+                        (भगवान शिव का अभिषेक अत्यंत शुभ है)
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head red">खेती-बाड़ी (कृषि)</div>
+                    <div class="box-content tight-text">
+                        खरीफ फसलों (धान, मक्का) में यूरिया की दूसरी डोज़ दें। तिलहन फसलों में निराई-गुड़ाई करें। सब्जियों की बुवाई के लिए खेत तैयार करें।
+                    </div>
+                </div>
+
+                <div class="box fill">
+                    <div class="box-head blue">अगस्त के मुख्य त्यौहार</div>
+                    <div class="box-content tight-text">
+                        <ul style="padding-left:15px; margin:0; font-size:0.9rem; line-height:1.6;">
+                            <li>12: हरियाली अमावस्या</li>
+                            <li>15: स्वतंत्रता दिवस</li>
+                            <li>16: हरियाली तीज</li>
+                            <li>18: नाग पंचमी</li>
+                            <li>24: पुत्रदा एकादशी</li>
+                            <li>28: रक्षा बंधन (पूर्णिमा)</li>
+                            <li>31: कजरी तीज</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="footer-list">
+            <div class="f-item"><span style="color:red; font-weight:bold;">09:</span> कामिका एकादशी</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">12:</span> हरियाली अमावस्या</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">15:</span> स्वतंत्रता दिवस</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">16:</span> हरियाली तीज</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">18:</span> नाग पंचमी</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">21:</span> वरलक्ष्मी व्रत</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">24:</span> पुत्रदा एकादशी</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">28:</span> रक्षा बंधन</div>
+        </div>
+    </div>
+
+</body>
+</html>
