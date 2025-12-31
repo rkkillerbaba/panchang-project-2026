@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=1400, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>अक्टूबर 2026 - पंचांग</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --border-color: #444;
+            --bg-paper: #fffef8;
+            --red-header: #b71c1c;
+            --saffron: #ff9800;
+            --text-blue: #0d47a1;
+            --text-red: #d50000;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #424242;
+            font-family: 'Tiro Devanagari Hindi', serif;
+            padding: 20px;
+            min-width: 1400px;
+        }
+
+        .calendar-wrapper {
+            width: 1360px;
+            min-height: 1250px; 
+            margin: 0 auto;
+            background-color: var(--bg-paper);
+            box-shadow: 0 0 30px rgba(0,0,0,0.7);
+            border: 6px solid #ff6f00;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(to right, #b71c1c, #e65100);
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            border-bottom: 6px solid #ffeb3b;
+        }
+
+        .header-left h1 { font-size: 4rem; line-height: 1; text-shadow: 2px 2px 4px #000; margin: 0; font-family: 'Tiro Devanagari Hindi', serif; }
+        .header-left p { color: #fff3e0; font-size: 1.3rem; margin-top: 5px; font-weight: bold; letter-spacing: 1px; }
+
+        .month-circle {
+            background: #fff;
+            color: var(--red-header);
+            padding: 5px 55px;
+            border-radius: 60px;
+            text-align: center;
+            border: 4px solid var(--saffron);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .month-circle h2 { font-size: 3rem; margin: 0; line-height: 1; font-family: 'Oswald', sans-serif; }
+        .month-circle span { font-size: 1.2rem; color: #333; font-weight: bold; }
+
+        .om { font-size: 4.5rem; color: #ffeb3b; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+
+        /* MAIN LAYOUT */
+        .main-container {
+            display: grid;
+            grid-template-columns: 270px 1fr 270px;
+            flex-grow: 1;
+        }
+
+        /* SIDEBARS */
+        .sidebar {
+            background: #fff8e1;
+            border-right: 3px solid #ffcc80;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .sidebar.right { border-right: none; border-left: 3px solid #ffcc80; }
+
+        .box { 
+            border: 1px solid #ff9800; 
+            background: #fff; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .box.fill { flex-grow: 1; }
+
+        .box-head {
+            background: #e65100;
+            color: white;
+            text-align: center;
+            font-weight: bold;
+            padding: 6px;
+            font-size: 1.1rem;
+            border-bottom: 2px solid #bf360c;
+        }
+        .box-head.blue { background: #1565c0; border-bottom-color: #0d47a1; }
+        .box-head.red { background: #c62828; border-bottom-color: #b71c1c; }
+        
+        .box-content { padding: 10px; font-size: 0.9rem; line-height: 1.5; color: #222; }
+        
+        .rashi-list { padding: 0; margin: 0; list-style: none; }
+        .rashi-list li { margin-bottom: 5px; border-bottom: 1px dotted #ccc; padding-bottom: 2px; }
+        .rashi-name { font-weight: bold; color: #d84315; }
+
+        /* CALENDAR GRID */
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            grid-template-rows: 45px repeat(5, 205px); 
+            background: #ffcc80;
+            gap: 2px;
+            border-bottom: 2px solid #ffcc80;
+        }
+
+        .day-name { background: #3e2723; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold; text-transform: uppercase; }
+        .day-name.sun { background: #d50000; }
+
+        /* DATE CELLS */
+        .date-cell {
+            background: #fff;
+            height: 100%; 
+            padding: 8px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid transparent;
+            overflow: hidden;
+        }
+
+        .date-cell:hover { background: #fff3e0; z-index: 10; border: 1px solid var(--saffron); box-shadow: inset 0 0 10px rgba(255, 167, 38, 0.2); overflow: visible; }
+        .date-cell.sunday { background: #ffcdd2; }
+        .date-cell.holiday { background: #e3f2fd; }
+
+        .num {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #333;
+            text-align: right;
+            line-height: 0.9;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            z-index: 2;
+        }
+        .sunday .num { color: #b71c1c; }
+
+        .events {
+            margin-top: 55px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            z-index: 5;
+            position: relative;
+        }
+        
+        .evt-row { display: block; margin-top: 4px; line-height: 1.25; border-left: 3px solid transparent; padding-left: 4px; }
+        .evt-row.red-text { border-left-color: #d50000; }
+        .evt-row.blue-text { border-left-color: #0d47a1; }
+        
+        .red-text { color: #d50000; }
+        .blue-text { color: #0d47a1; }
+        .saffron-text { color: #e65100; }
+
+        /* FOOTER */
+        .footer-list {
+            padding: 12px;
+            background: #ffe0b2;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 0.9rem;
+            border-top: 4px solid #ff9800;
+        }
+        .f-item { border-bottom: 1px dashed #d84315; padding-bottom: 4px; }
+
+        /* Helpers */
+        .tight-text { font-size: 0.85rem; }
+        .highlight-box { background: #fffde7; padding: 2px 5px; border-radius: 3px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="calendar-wrapper">
+        <header>
+            <div class="header-left">
+                <h1>पंचांग - 2026</h1>
+                <p>सनातन धर्म हेतु</p>
+            </div>
+            <div class="month-circle">
+                <h2>अक्टूबर</h2>
+                <span>2026</span>
+            </div>
+            <div class="om">ॐ</div>
+        </header>
+
+        <div class="main-container">
+            <aside class="sidebar">
+                
+                <div class="box">
+                    <div class="box-head">मास विचार (अक्टूबर)</div>
+                    <div class="box-content tight-text">
+                        <strong>सूर्य:</strong> 17 अक्टूबर को तुला राशि में प्रवेश (तुला संक्रांति)।<br>
+                        <strong>मास:</strong> आश्विन (10 तक), फिर कार्तिक।<br>
+                        <strong>ऋतु:</strong> शरद ऋतु (हल्की ठंड की शुरुआत)।
+                    </div>
+                </div>
+                
+                <div class="box">
+                    <div class="box-head red">विवाह मुहूर्त</div>
+                    <div class="box-content tight-text">
+                        <strong>चातुर्मास:</strong> देवशयनी एकादशी के कारण इस माह भी विवाह के कोई शुभ मुहूर्त नहीं हैं।<br>
+                        <em>(देवउठनी एकादशी - नवंबर से मांगलिक कार्य शुरू होंगे)</em>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head blue">शारदीय नवरात्रि (महत्वपूर्ण)</div>
+                    <div class="box-content tight-text">
+                        <strong>11 अक्टूबर (रविवार) से प्रारंभ:</strong><br>
+                        <strong>घटस्थापना:</strong> प्रातः 06:22 से 10:15 तक।<br>
+                        <strong>दशहरा:</strong> 20 अक्टूबर (मंगलवार)।<br>
+                        इस बार पूरे 9 दिन की नवरात्रि है।
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head red">सरकारी छुट्टियाँ</div>
+                    <div class="box-content tight-text">
+                        <ul style="padding-left:15px; margin:0; line-height:1.6;">
+                            <li><strong>02 अक्टूबर:</strong> गांधी जयंती</li>
+                            <li><strong>20 अक्टूबर:</strong> दशहरा (विजयादशमी)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head blue">करवा चौथ पूजन</div>
+                    <div class="box-content tight-text">
+                        <strong>29 अक्टूबर (गुरुवार):</strong><br>
+                        सुहागिनों का महापर्व करवा चौथ।<br>
+                        <strong>चंद्रोदय:</strong> रात्रि 08:25 बजे (अनुमानित)।<br>
+                        (चतुर्थी तिथि 29 को शाम 04:30 से शुरू)
+                    </div>
+                </div>
+
+                <div class="box fill">
+                    <div class="box-head red">पंचक विचार</div>
+                    <div class="box-content tight-text">
+                        <div style="margin-bottom:8px;">
+                            <strong>पंचक (Panchak):</strong><br>
+                            22 अक्टूबर (शाम 05:40) से<br>
+                            27 अक्टूबर (दोपहर 01:15) तक।
+                        </div>
+                        <hr style="border-top:1px dashed #ccc;">
+                        <div>
+                            <strong>गंडमूल नक्षत्र:</strong><br>
+                            • 4-6 अक्टूबर (आश्लेषा)<br>
+                            • 14-16 अक्टूबर (ज्येष्ठा)<br>
+                            • 23-25 अक्टूबर (रेवती)
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <main class="cal-grid">
+                <div class="day-name sun">रवि</div>
+                <div class="day-name">सोम</div>
+                <div class="day-name">मंगल</div>
+                <div class="day-name">बुध</div>
+                <div class="day-name">गुरु</div>
+                <div class="day-name">शुक्र</div>
+                <div class="day-name">शनि</div>
+
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+                <div class="date-cell" style="background:transparent; border:none;"></div>
+
+                <div class="date-cell">
+                    <div class="num">1</div>
+                    <div class="events">
+                        <span class="evt-row">आश्विन कृष्ण पंचमी</span>
+                        <span class="evt-row">पंचमी श्राद्ध</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#fffde7;">
+                    <div class="num">2</div>
+                    <div class="events">
+                        <span class="evt-row blue-text" style="font-weight:bold;">गांधी जयंती</span>
+                        <span class="evt-row red-text">षष्ठी श्राद्ध</span>
+                        <span class="evt-row">कृष्ण षष्ठी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">3</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण सप्तमी</span>
+                        <span class="evt-row">सप्तमी श्राद्ध</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday">
+                    <div class="num">4</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण अष्टमी</span>
+                        <span class="evt-row red-text">अष्टमी श्राद्ध</span>
+                        <span class="evt-row">महालक्ष्मी व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">5</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण नवमी</span>
+                        <span class="evt-row blue-text">मातृ नवमी श्राद्ध</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">6</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण दशमी</span>
+                        <span class="evt-row">दशमी श्राद्ध</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">7</div>
+                    <div class="events">
+                        <span class="evt-row red-text">इंदिरा एकादशी</span>
+                        <span class="evt-row highlight-box">एकादशी श्राद्ध</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">8</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण द्वादशी</span>
+                        <span class="evt-row blue-text">संन्यासी श्राद्ध</span>
+                        <span class="evt-row">प्रदोष व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">9</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण त्रयोदशी</span>
+                        <span class="evt-row red-text">मासिक शिवरात्रि</span>
+                        <span class="evt-row">त्रयोदशी श्राद्ध</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#e3f2fd;">
+                    <div class="num">10</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-weight:bold;">सर्वपितृ अमावस्या</span>
+                        <span class="evt-row highlight-box">महालय (श्राद्ध समाप्त)</span>
+                        <span class="evt-row">पितृ विसर्जन</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday holiday" style="background:#fffde7;">
+                    <div class="num">11</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-size:1.1rem; font-weight:bold;">★ नवरात्रि प्रारंभ</span>
+                        <span class="evt-row">घटस्थापना</span>
+                        <span class="evt-row">आश्विन शुक्ल प्रतिपदा</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">12</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल द्वितीया</span>
+                        <span class="evt-row blue-text">ब्रह्मचारिणी पूजा</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">13</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल तृतीया</span>
+                        <span class="evt-row">चंद्रघंटा पूजा</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">14</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल चतुर्थी</span>
+                        <span class="evt-row red-text">विनायक चतुर्थी</span>
+                        <span class="evt-row">कूष्माण्डा पूजा</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">15</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल पंचमी (स्कन्दमाता)</span>
+                        <span class="evt-row">उपांग ललिता व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">16</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल षष्ठी (कात्यायनी)</span>
+                        <span class="evt-row blue-text">सरस्वती आवाहन</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#e3f2fd;">
+                    <div class="num">17</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-weight:bold;">तुला संक्रांति</span>
+                        <span class="evt-row">शुक्ल सप्तमी (कालरात्रि)</span>
+                        <span class="evt-row">महा सप्तमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday">
+                    <div class="num">18</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल अष्टमी</span>
+                        <span class="evt-row red-text highlight-box">महागौरी पूजा</span>
+                        <span class="evt-row">दुर्गा अष्टमी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">19</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल नवमी</span>
+                        <span class="evt-row blue-text">महानवमी (हवन)</span>
+                        <span class="evt-row">सिद्धिदात्री पूजा</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#fffde7;">
+                    <div class="num">20</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-size:1.3rem; font-weight:bold;">दशहरा</span>
+                        <span class="evt-row highlight-box">विजयदशमी</span>
+                        <span class="evt-row">रावण दहन / शमी पूजन</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">21</div>
+                    <div class="events">
+                        <span class="evt-row">पापांकुशा एकादशी</span>
+                        <span class="evt-row">भरत मिलाप</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">22</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल द्वादशी</span>
+                        <span class="evt-row red-text">पंचक प्रारंभ (शाम)</span>
+                        <span class="evt-row">प्रदोष व्रत</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">23</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल त्रयोदशी</span>
+                        <span class="evt-row">कोजागरी व्रत (शुरू)</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">24</div>
+                    <div class="events">
+                        <span class="evt-row">शुक्ल चतुर्दशी</span>
+                        <span class="evt-row">शरद पूर्णिमा (पूर्व रात्रि)</span>
+                    </div>
+                </div>
+
+                <div class="date-cell sunday holiday" style="background:#e3f2fd;">
+                    <div class="num">25</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-weight:bold;">शरद पूर्णिमा</span>
+                        <span class="evt-row">कोजागरी (मुख्य)</span>
+                        <span class="evt-row highlight-box">वाल्मीकि जयंती</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">26</div>
+                    <div class="events">
+                        <span class="evt-row">कार्तिक कृष्ण प्रतिपदा</span>
+                        <span class="evt-row">अशून्य शयन</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">27</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण द्वितीया</span>
+                        <span class="evt-row blue-text">पंचक समाप्त</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">28</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण तृतीया</span>
+                        <span class="evt-row red-text">वक्रतुण्ड चतुर्थी</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#ffebee;">
+                    <div class="num">29</div>
+                    <div class="events">
+                        <span class="evt-row red-text" style="font-weight:bold; font-size:1.1rem;">करवा चौथ</span>
+                        <span class="evt-row highlight-box">संकष्टी चतुर्थी</span>
+                        <span class="evt-row">चंद्रोदय: 08:25 PM</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">30</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण पंचमी</span>
+                        <span class="evt-row">स्कन्द षष्ठी (शुरू)</span>
+                    </div>
+                </div>
+
+                <div class="date-cell">
+                    <div class="num">31</div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण षष्ठी</span>
+                        <span class="evt-row blue-text">हल षष्ठी</span>
+                    </div>
+                </div>
+
+            </main>
+
+            <aside class="sidebar right">
+                <div class="box">
+                    <div class="box-head">राशिफल (अक्टूबर 2026)</div>
+                    <div class="box-content">
+                        <ul class="rashi-list" style="padding-left:0; list-style:none; font-size:0.85rem;">
+                            <li><span class="rashi-name">मेष:</span> पदोन्नति के योग, स्वास्थ्य अच्छा रहेगा।</li>
+                            <li><span class="rashi-name">वृषभ:</span> धन लाभ होगा, लेकिन खर्च भी बढ़ेंगे।</li>
+                            <li><span class="rashi-name">मिथुन:</span> शिक्षा में सफलता, विदेश यात्रा संभव।</li>
+                            <li><span class="rashi-name">कर्क:</span> पारिवारिक सुख-शांति, वाहन सुख।</li>
+                            <li><span class="rashi-name">सिंह:</span> सूर्य का गोचर, मान-सम्मान बढ़ेगा।</li>
+                            <li><span class="rashi-name">कन्या:</span> सेहत का ध्यान रखें, वाद-विवाद से बचें।</li>
+                            <li><span class="rashi-name">तुला:</span> दांपत्य जीवन में मधुरता, व्यापार लाभ।</li>
+                            <li><span class="rashi-name">वृश्चिक:</span> शत्रु परास्त होंगे, कोर्ट में जीत।</li>
+                            <li><span class="rashi-name">धनु:</span> संतान पक्ष से शुभ समाचार, धर्म लाभ।</li>
+                            <li><span class="rashi-name">मकर:</span> नौकरी में बदलाव, माता का सहयोग।</li>
+                            <li><span class="rashi-name">कुंभ:</span> भाई-बहन से विवाद संभव, धैर्य रखें।</li>
+                            <li><span class="rashi-name">मीन:</span> आय के नए स्रोत, भाग्य का पूरा साथ।</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="box">
+                    <div class="box-head red">दिवाली पूर्व सफाई/पुताई</div>
+                    <div class="box-content tight-text">
+                        दिवाली से पहले घर की सफाई और रंग-रोगन के लिए शुभ समय:<br>
+                        <strong>15 अक्टूबर से 25 अक्टूबर</strong> के बीच।<br>
+                        टूटी-फूटी वस्तुएं और कबाड़ घर से बाहर निकालें।
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head blue">सर्वार्थ सिद्धि योग</div>
+                    <div class="box-content tight-text">
+                        अक्टूबर में शुभ कार्य हेतु योग:<br>
+                        <strong>4, 9, 11, 15, 20, 23, 27, 30 अक्टूबर।</strong>
+                    </div>
+                </div>
+
+                <div class="box">
+                    <div class="box-head red">खरीदारी मुहूर्त (पुष्य)</div>
+                    <div class="box-content tight-text">
+                        <strong>गुरु पुष्य योग:</strong> 29 अक्टूबर।<br>
+                        सोना, चांदी, बही-खाता और वाहन खरीदने के लिए यह दिन अक्षय तृतीया समान शुभ है।
+                    </div>
+                </div>
+
+                <div class="box fill">
+                    <div class="box-head red">अक्टूबर के मुख्य त्यौहार</div>
+                    <div class="box-content tight-text">
+                        <ul style="padding-left:15px; margin:0; font-size:0.9rem; line-height:1.6;">
+                            <li>02: गांधी जयंती</li>
+                            <li>10: सर्वपितृ अमावस्या</li>
+                            <li>11: नवरात्रि प्रारंभ</li>
+                            <li>18: महाअष्टमी</li>
+                            <li>20: दशहरा (विजयदशमी)</li>
+                            <li>25: शरद पूर्णिमा</li>
+                            <li>29: करवा चौथ</li>
+                        </ul>
+                    </div>
+                </div>
+            </aside>
+        </div>
+
+        <div class="footer-list">
+            <div class="f-item"><span style="color:red; font-weight:bold;">02:</span> गांधी जयंती</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">10:</span> सर्वपितृ अमावस्या</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">11:</span> नवरात्रि शुरू</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">18:</span> महाअष्टमी</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">20:</span> दशहरा</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">25:</span> शरद पूर्णिमा</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">29:</span> करवा चौथ</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">31:</span> हल षष्ठी</div>
+        </div>
+    </div>
+
+</body>
+</html>
