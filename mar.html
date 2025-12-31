@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1400, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>मार्च 2026 - पंचांग</title>
+    <title>मार्च 2026 - पंचांग (With Web Icons)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -16,6 +16,7 @@
             --saffron: #ff9800;
             --text-blue: #0d47a1;
             --text-red: #d50000;
+            --rashi-bg: #fff3e0;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,8 +30,7 @@
 
         .calendar-wrapper {
             width: 1360px;
-            /* Height increased to fit 5 rows for March */
-            min-height: 1050px; 
+            min-height: 1300px; 
             margin: 0 auto;
             background-color: var(--bg-paper);
             box-shadow: 0 0 30px rgba(0,0,0,0.7);
@@ -41,7 +41,7 @@
 
         /* HEADER */
         header {
-            background: linear-gradient(to right, #b71c1c, #e65100);
+            background: linear-gradient(to right, #d84315, #ff6f00);
             color: #fff;
             display: flex;
             justify-content: space-between;
@@ -55,8 +55,8 @@
 
         .month-circle {
             background: #fff;
-            color: var(--red-header);
-            padding: 5px 55px;
+            color: #d84315;
+            padding: 5px 45px;
             border-radius: 60px;
             text-align: center;
             border: 4px solid var(--saffron);
@@ -71,7 +71,6 @@
         .main-container {
             display: grid;
             grid-template-columns: 270px 1fr 270px;
-            flex-grow: 1;
         }
 
         /* SIDEBARS */
@@ -109,16 +108,11 @@
         
         .box-content { padding: 10px; font-size: 0.9rem; line-height: 1.5; color: #222; }
         
-        .rashi-list { padding: 0; margin: 0; list-style: none; }
-        .rashi-list li { margin-bottom: 5px; border-bottom: 1px dotted #ccc; padding-bottom: 2px; }
-        .rashi-name { font-weight: bold; color: #d84315; }
-
-        /* CALENDAR GRID - MARCH SETTINGS */
+        /* CALENDAR GRID */
         .cal-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            /* मार्च में 5 हफ्ते होंगे, इसलिए 5 रो (195px each) */
-            grid-template-rows: 45px repeat(5, 195px); 
+            grid-template-rows: 45px repeat(5, 145px); 
             background: #ffcc80;
             gap: 2px;
             border-bottom: 2px solid #ffcc80;
@@ -131,7 +125,7 @@
         .date-cell {
             background: #fff;
             height: 100%; 
-            padding: 8px;
+            padding: 5px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -145,27 +139,27 @@
 
         .num {
             font-family: 'Oswald', sans-serif;
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             color: #333;
             text-align: right;
             line-height: 0.9;
             position: absolute;
-            top: 5px;
-            right: 10px;
+            top: 2px;
+            right: 5px;
             z-index: 2;
         }
         .sunday .num { color: #b71c1c; }
 
         .events {
-            margin-top: 55px;
-            font-size: 0.9rem;
+            margin-top: 40px;
+            font-size: 0.85rem;
             font-weight: 600;
             z-index: 5;
             position: relative;
         }
         
-        .evt-row { display: block; margin-top: 4px; line-height: 1.25; border-left: 3px solid transparent; padding-left: 4px; }
+        .evt-row { display: block; margin-top: 3px; line-height: 1.2; border-left: 3px solid transparent; padding-left: 3px; }
         .evt-row.red-text { border-left-color: #d50000; }
         .evt-row.blue-text { border-left-color: #0d47a1; }
         
@@ -173,18 +167,92 @@
         .blue-text { color: #0d47a1; }
         .saffron-text { color: #e65100; }
 
-        /* FOOTER */
-        .footer-list {
-            padding: 12px;
-            background: #ffe0b2;
+        /* FOOTER: RASHIFAL SECTION */
+        .footer-horoscope {
+            background-color: #fffde7;
+            border-top: 6px solid #d84315;
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .horoscope-title {
+            text-align: center;
+            color: #b71c1c;
+            font-size: 2.2rem;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+            border-bottom: 2px dashed #ff9800;
+            padding-bottom: 10px;
+        }
+
+        .rashi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px;
+        }
+
+        .rashi-card {
+            background: #fff;
+            border: 2px solid #ffcc80;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s;
+            overflow: hidden;
+        }
+        .rashi-card:hover { transform: translateY(-5px); border-color: #ff6f00; box-shadow: 0 8px 16px rgba(0,0,0,0.1); }
+
+        .rashi-header {
+            background: linear-gradient(to right, #e65100, #ff9800);
+            color: white;
+            padding: 10px 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
             display: flex;
             justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-            font-size: 0.9rem;
-            border-top: 4px solid #ff9800;
+            align-items: center;
+            border-bottom: 3px solid #bf360c;
         }
-        .f-item { border-bottom: 1px dashed #d84315; padding-bottom: 4px; }
+
+        /* SVG Web Icon Style */
+        .zodiac-icon {
+            width: 28px;
+            height: 28px;
+            fill: #fff; /* Icon color white */
+            filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.3));
+        }
+        
+        .rashi-body {
+            padding: 15px;
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.5;
+            flex-grow: 1;
+        }
+
+        .rh-sub {
+            display: block;
+            margin-top: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: bold;
+            font-size: 1rem;
+            letter-spacing: 0.5px;
+            border-bottom: 1px dotted #ddd;
+            padding-bottom: 2px;
+            margin-bottom: 3px;
+        }
+        
+        .c-blue { color: #1565c0; } 
+        .c-green { color: #2e7d32; } 
+        .c-red { color: #c62828; } 
+        .c-purple { color: #6a1b9a; } 
+        .c-brown { color: #5d4037; } 
 
         /* Helpers */
         .tight-text { font-size: 0.85rem; }
@@ -213,28 +281,27 @@
                 <div class="box">
                     <div class="box-head">मास विचार (मार्च)</div>
                     <div class="box-content tight-text">
-                        <strong>सूर्य:</strong> 14 मार्च को मीन राशि में प्रवेश (मीन संक्रांति / खरमास)।<br>
-                        <strong>ऋतु:</strong> वसंत ऋतु (बहार) का पूर्ण प्रभाव।<br>
-                        <strong>मास:</strong> फाल्गुन (3 मार्च तक), फिर चैत्र (नवसंवत्सर)।
+                        <strong>सूर्य:</strong> 14 मार्च को मीन राशि में प्रवेश (मीन संक्रांति/खरमास प्रारंभ)।<br>
+                        <strong>ऋतु:</strong> वसंत ऋतु का उल्लास।<br>
+                        <strong>मास:</strong> फाल्गुन (1-18 तक), फिर चैत्र (नवसंवत्सर)।
                     </div>
                 </div>
                 
                 <div class="box">
-                    <div class="box-head red">विवाह मुहूर्त</div>
+                    <div class="box-head red">विवाह मुहूर्त (सीमित)</div>
                     <div class="box-content tight-text">
-                        14 मार्च से खरमास शुरू होने के कारण माह के अंत में विवाह नहीं हैं। शुभ तारीखें:<br>
-                        <strong style="color:#b71c1c; font-size:1rem;">1, 2, 5, 6, 7, 11, 12 मार्च।</strong><br>
-                        <hr style="margin:5px 0;">
-                        <em>(14 के बाद मांगलिक कार्य वर्जित)</em>
+                        इस माह विवाह मुहूर्त कम हैं (होलिका व खरमास के कारण)।<br>
+                        <strong>शुभ तारीखें:</strong> 5, 6, 8, 11 मार्च।<br>
+                        <span style="color:red; font-size:0.8rem;">(14 मार्च से खरमास शुरू, विवाह वर्जित)</span>
                     </div>
                 </div>
 
                 <div class="box">
                     <div class="box-head blue">गृह प्रवेश मुहूर्त</div>
                     <div class="box-content tight-text">
-                        <strong>गृह प्रवेश:</strong> 2, 7, 11 मार्च।<br>
-                        <strong>वाहन खरीद:</strong> 1, 5, 6, 12, 19, 23 मार्च।<br>
-                        <em>(खरमास में नए निर्माण से बचें)</em>
+                        <strong>गृह प्रवेश:</strong> 2, 7, 11, 12 मार्च।<br>
+                        (होली के बाद और खरमास से पहले प्रवेश शुभ है)।<br>
+                        <strong>वाहन खरीद:</strong> 1, 5, 12, 19, 26 मार्च।
                     </div>
                 </div>
 
@@ -242,36 +309,27 @@
                     <div class="box-head red">सरकारी छुट्टियाँ</div>
                     <div class="box-content tight-text">
                         <ul style="padding-left:15px; margin:0; line-height:1.6;">
-                            <li><strong>04 मार्च:</strong> होली / धुलंडी</li>
-                            <li><strong>27 मार्च:</strong> राम नवमी (गजेटेड)</li>
-                            <li><strong>31 मार्च:</strong> महावीर जयंती</li>
+                            <li><strong>4 मार्च:</strong> होली (धुलंडी)</li>
+                            <li><strong>27 मार्च:</strong> राम नवमी</li>
+                            <li><strong>29 मार्च:</strong> महावीर जयंती</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="box">
-                    <div class="box-head blue">नामकरण मुहूर्त</div>
-                    <div class="box-content tight-text">
-                        शिशु नामकरण हेतु शुभ दिन:<br>
-                        <strong>1, 4, 5, 9, 11, 13, 16, 19, 22, 26, 30 मार्च।</strong>
-                    </div>
-                </div>
-
                 <div class="box fill">
-                    <div class="box-head">पंचक विचार</div>
+                    <div class="box-head">पंचक एवं गंडमूल</div>
                     <div class="box-content tight-text">
                         <div style="margin-bottom:8px;">
-                            <strong>पंचक (Panchak):</strong><br>
-                            15 मार्च (रात 10:45) से<br>
-                            20 मार्च (सुबह 08:20) तक।
+                            <strong>पंचक:</strong><br>
+                            15 मार्च (रात्रि 08:12) से<br>
+                            20 मार्च (शाम 05:45) तक।
                         </div>
                         <hr style="border-top:1px dashed #ccc;">
                         <div>
                             <strong>गंडमूल नक्षत्र:</strong><br>
-                            • 2-3 मार्च (आश्लेषा)<br>
-                            • 11-13 मार्च (ज्येष्ठा)<br>
-                            • 20-22 मार्च (रेवती)<br>
-                            • 30-31 मार्च (अश्विनी)
+                            • 1-3 मार्च (आश्लेषा)<br>
+                            • 12-14 मार्च (ज्येष्ठा)<br>
+                            • 21-23 मार्च (रेवती)
                         </div>
                     </div>
                 </div>
@@ -289,107 +347,89 @@
                 <div class="date-cell sunday">
                     <div class="num">1</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल द्वादशी</span>
-                        <span class="evt-row blue-text">रवि पुष्य योग</span>
+                        <span class="evt-row">फाल्गुन शुक्ल द्वादशी</span>
                         <span class="evt-row">प्रदोष व्रत</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">2</div>
-                    <div class="events">
-                        <span class="evt-row">शुक्ल त्रयोदशी</span>
-                        <span class="evt-row">महेश्वर व्रत</span>
-                    </div>
+                    <div class="events"><span class="evt-row">शुक्ल त्रयोदशी</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">3</div>
                     <div class="events">
                         <span class="evt-row red-text highlight-box">होलिका दहन</span>
-                        <span class="evt-row">फाल्गुन पूर्णिमा</span>
-                        <span class="evt-row">सत्यनारायण व्रत</span>
+                        <span class="evt-row">पूर्णिमा व्रत (रात्रि)</span>
                     </div>
                 </div>
 
-                <div class="date-cell holiday" style="background:#fffde7;">
+                <div class="date-cell holiday" style="background:#fff3e0;">
                     <div class="num">4</div>
                     <div class="events">
                         <span class="evt-row red-text" style="font-size:1.2rem; font-weight:bold;">होली (धुलंडी)</span>
+                        <span class="evt-row">फाल्गुन पूर्णिमा</span>
                         <span class="evt-row">वसंतोत्सव</span>
-                        <span class="evt-row">चैत्र कृष्ण प्रतिपदा</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">5</div>
-                    <div class="events">
-                        <span class="evt-row">कृष्ण द्वितीया</span>
-                        <span class="evt-row">भाई दूज (होली)</span>
-                    </div>
+                    <div class="events"><span class="evt-row">चैत्र कृष्ण प्रतिपदा</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">6</div>
-                    <div class="events"><span class="evt-row">कृष्ण तृतीया</span></div>
+                    <div class="events"><span class="evt-row">कृष्ण द्वितीया</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">7</div>
                     <div class="events">
-                        <span class="evt-row">कृष्ण चतुर्थी</span>
-                        <span class="evt-row red-text">संकष्टी चतुर्थी</span>
+                        <span class="evt-row">कृष्ण तृतीया</span>
+                        <span class="evt-row blue-text">संकष्टी चतुर्थी (चंद्रोदय)</span>
                     </div>
                 </div>
 
                 <div class="date-cell sunday">
                     <div class="num">8</div>
                     <div class="events">
-                        <span class="evt-row">कृष्ण पंचमी</span>
-                        <span class="evt-row blue-text">अंतर्राष्ट्रीय महिला दिवस</span>
-                        <span class="evt-row">रंग पंचमी</span>
+                        <span class="evt-row">कृष्ण चतुर्थी</span>
+                        <span class="evt-row red-text">गणेश चतुर्थी व्रत</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">9</div>
-                    <div class="events">
-                        <span class="evt-row red-text">शीतला षष्ठी</span>
-                        <span class="evt-row">एकनाथ षष्ठी</span>
-                    </div>
+                    <div class="events"><span class="evt-row">कृष्ण पंचमी</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">10</div>
-                    <div class="events">
-                        <span class="evt-row">कृष्ण सप्तमी</span>
-                        <span class="evt-row blue-text">शीतला सप्तमी</span>
-                    </div>
+                    <div class="events"><span class="evt-row">कृष्ण षष्ठी</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">11</div>
-                    <div class="events">
-                        <span class="evt-row red-text highlight-box">बसोड़ा (शीतला अष्टमी)</span>
-                        <span class="evt-row">कालाष्टमी</span>
-                    </div>
+                    <div class="events"><span class="evt-row">कृष्ण सप्तमी</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">12</div>
-                    <div class="events"><span class="evt-row">कृष्ण नवमी</span></div>
+                    <div class="events"><span class="evt-row">कृष्ण अष्टमी (शीतला अष्टमी)</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">13</div>
-                    <div class="events"><span class="evt-row">कृष्ण दशमी</span></div>
+                    <div class="events"><span class="evt-row">कृष्ण नवमी</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">14</div>
                     <div class="events">
-                        <span class="evt-row">पापमोचिनी एकादशी</span>
                         <span class="evt-row blue-text">★ मीन संक्रांति (खरमास)</span>
+                        <span class="evt-row red-text">पापमोचनी एकादशी</span>
                     </div>
                 </div>
 
@@ -397,22 +437,20 @@
                     <div class="num">15</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण द्वादशी</span>
-                        <span class="evt-row red-text">पंचक शुरू (रात्रि)</span>
+                        <span class="evt-row">प्रदोष व्रत</span>
+                        <span class="evt-row blue-text">पंचक शुरू</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">16</div>
-                    <div class="events">
-                        <span class="evt-row">कृष्ण त्रयोदशी</span>
-                        <span class="evt-row">प्रदोष व्रत</span>
-                    </div>
+                    <div class="events"><span class="evt-row">कृष्ण त्रयोदशी</span></div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">17</div>
                     <div class="events">
-                        <span class="evt-row red-text">मासिक शिवरात्रि</span>
+                        <span class="evt-row">मासिक शिवरात्रि</span>
                         <span class="evt-row">कृष्ण चतुर्दशी</span>
                     </div>
                 </div>
@@ -428,9 +466,9 @@
                 <div class="date-cell holiday" style="background:#e3f2fd;">
                     <div class="num">19</div>
                     <div class="events">
-                        <span class="evt-row red-text" style="font-weight:bold;">★ हिंदू नववर्ष (2083)</span>
-                        <span class="evt-row blue-text">चैत्र नवरात्रि प्रारंभ</span>
-                        <span class="evt-row">गुड़ी पड़वा / घटस्थापना</span>
+                        <span class="evt-row red-text highlight-box">हिन्दू नववर्ष (विक्रम 2083)</span>
+                        <span class="evt-row">चैत्र नवरात्रि प्रारंभ</span>
+                        <span class="evt-row">गुड़ी पड़वा / उगादी</span>
                     </div>
                 </div>
 
@@ -438,18 +476,13 @@
                     <div class="num">20</div>
                     <div class="events">
                         <span class="evt-row">शुक्ल द्वितीया</span>
-                        <span class="evt-row blue-text">चेटी चंड (सिंधी पर्व)</span>
-                        <span class="evt-row">पंचक समाप्त</span>
+                        <span class="evt-row">चेटीचंड (सिंधी पर्व)</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">21</div>
-                    <div class="events">
-                        <span class="evt-row">शुक्ल तृतीया</span>
-                        <span class="evt-row red-text highlight-box">गणगौर पूजा</span>
-                        <span class="evt-row">मत्स्य जयंती</span>
-                    </div>
+                    <div class="events"><span class="evt-row">शुक्ल तृतीया (गणगौर पूजा)</span></div>
                 </div>
 
                 <div class="date-cell sunday">
@@ -462,11 +495,7 @@
 
                 <div class="date-cell">
                     <div class="num">23</div>
-                    <div class="events">
-                        <span class="evt-row">शुक्ल पंचमी</span>
-                        <span class="evt-row blue-text">शहीद दिवस</span>
-                        <span class="evt-row">लक्ष्मी पंचमी</span>
-                    </div>
+                    <div class="events"><span class="evt-row">शुक्ल पंचमी (लक्ष्मी पंचमी)</span></div>
                 </div>
 
                 <div class="date-cell">
@@ -481,99 +510,74 @@
 
                 <div class="date-cell">
                     <div class="num">26</div>
-                    <div class="events">
-                        <span class="evt-row red-text">दुर्गा अष्टमी</span>
-                        <span class="evt-row">भवानी उत्पत्ति</span>
-                        <span class="evt-row">अशोकाष्टमी</span>
-                    </div>
+                    <div class="events"><span class="evt-row">शुक्ल अष्टमी (दुर्गा अष्टमी)</span></div>
                 </div>
 
                 <div class="date-cell holiday" style="background:#fffde7;">
                     <div class="num">27</div>
                     <div class="events">
-                        <span class="evt-row red-text" style="font-size:1.3rem; font-weight:bold;">राम नवमी</span>
+                        <span class="evt-row red-text" style="font-size:1.2rem; font-weight:bold;">राम नवमी</span>
+                        <span class="evt-row">तारा जयंती</span>
                         <span class="evt-row">नवरात्रि समापन</span>
-                        <span class="evt-row">श्री राम जन्मोत्सव</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">28</div>
-                    <div class="events">
-                        <span class="evt-row">शुक्ल दशमी</span>
-                        <span class="evt-row">धर्मराज दशमी</span>
-                    </div>
+                    <div class="events"><span class="evt-row">शुक्ल दशमी</span></div>
                 </div>
 
                 <div class="date-cell sunday">
                     <div class="num">29</div>
                     <div class="events">
-                        <span class="evt-row">कामदा एकादशी</span>
-                        <span class="evt-row blue-text">सर्वार्थ सिद्धि योग</span>
+                        <span class="evt-row red-text">कामदा एकादशी</span>
+                        <span class="evt-row holiday">महावीर जयंती</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">30</div>
-                    <div class="events">
-                        <span class="evt-row">शुक्ल द्वादशी</span>
-                        <span class="evt-row">वामन द्वादशी</span>
-                        <span class="evt-row">प्रदोष व्रत</span>
-                    </div>
+                    <div class="events"><span class="evt-row">शुक्ल द्वादशी</span></div>
                 </div>
 
-                <div class="date-cell holiday" style="background:#e3f2fd;">
+                <div class="date-cell">
                     <div class="num">31</div>
                     <div class="events">
-                        <span class="evt-row red-text" style="font-weight:bold; font-size:1.1rem;">महावीर जयंती</span>
                         <span class="evt-row">शुक्ल त्रयोदशी</span>
                         <span class="evt-row">अनंग त्रयोदशी</span>
                     </div>
                 </div>
-
-                <div class="date-cell" style="background:transparent; border:none;"></div>
-                <div class="date-cell" style="background:transparent; border:none;"></div>
-                <div class="date-cell" style="background:transparent; border:none;"></div>
-                <div class="date-cell" style="background:transparent; border:none;"></div>
-
             </main>
 
             <aside class="sidebar right">
                 <div class="box">
-                    <div class="box-head">राशिफल (मार्च 2026)</div>
-                    <div class="box-content">
-                        <ul class="rashi-list" style="padding-left:0; list-style:none; font-size:0.85rem;">
-                            <li><span class="rashi-name">मेष:</span> धन लाभ, लेकिन क्रोध पर काबू रखें।</li>
-                            <li><span class="rashi-name">वृषभ:</span> पुराने निवेश से अच्छा मुनाफा।</li>
-                            <li><span class="rashi-name">मिथुन:</span> नौकरी में बदलाव के संकेत, शुभ।</li>
-                            <li><span class="rashi-name">कर्क:</span> धार्मिक यात्रा का योग, मन प्रसन्न।</li>
-                            <li><span class="rashi-name">सिंह:</span> खरमास में व्यापार धीमा रह सकता है।</li>
-                            <li><span class="rashi-name">कन्या:</span> जीवनसाथी का सहयोग, स्वास्थ्य लाभ।</li>
-                            <li><span class="rashi-name">तुला:</span> खर्च बढ़ेंगे, कोर्ट कचहरी से राहत।</li>
-                            <li><span class="rashi-name">वृश्चिक:</span> संतान पक्ष से खुशखबरी मिलेगी।</li>
-                            <li><span class="rashi-name">धनु:</span> प्रॉपर्टी विवाद सुलझेंगे, शांति।</li>
-                            <li><span class="rashi-name">मकर:</span> मेहनत का पूरा फल, प्रमोशन योग।</li>
-                            <li><span class="rashi-name">कुंभ:</span> वाहन सावधानी से चलाएं, चोट भय।</li>
-                            <li><span class="rashi-name">मीन:</span> सूर्य का आगमन, आत्मविश्वास बढ़ेगा।</li>
-                        </ul>
+                    <div class="box-head">ग्रह गोचर (मार्च 2026)</div>
+                    <div class="box-content tight-text">
+                        <strong>सूर्य:</strong> कुम्भ से मीन में (14 मार्च)।<br>
+                        <strong>मंगल:</strong> मकर राशि में उच्च के रहेंगे।<br>
+                        <strong>गुरु:</strong> मिथुन राशि में गोचर करेंगे।<br>
+                        <strong>शुक्र:</strong> मेष राशि में प्रवेश।<br>
+                        <em>(यह माह आध्यात्मिक कार्यों के लिए श्रेष्ठ है)</em>
                     </div>
                 </div>
                 
                 <div class="box">
-                    <div class="box-head red">बाजार तेजी-मंदी</div>
+                    <div class="box-head red">होली विशेष</div>
                     <div class="box-content tight-text">
-                        <strong>सोना/चांदी:</strong> 14 मार्च के बाद (खरमास) बाजार में सुस्ती आ सकती है।<br>
-                        <strong>शेयर बाजार:</strong> फार्मा और एफएमसीजी (FMCG) में उछाल रहेगा।<br>
-                        <strong>गुड़/चीनी:</strong> होली के बाद भाव गिरने की संभावना।
+                        <strong>होलिका दहन मुहूर्त:</strong><br>
+                        3 मार्च, शाम 06:45 से रात्रि 09:10 तक।<br>
+                        <strong>रंग वाली होली:</strong> 4 मार्च (बुधवार)।<br>
+                        <em>(भद्रा रहित काल में दहन करें)</em>
                     </div>
                 </div>
 
                 <div class="box">
-                    <div class="box-head blue">सर्वार्थ सिद्धि योग</div>
+                    <div class="box-head blue">चैत्र नवरात्रि</div>
                     <div class="box-content tight-text">
-                        मार्च में विशेष कार्य सिद्धि योग:<br>
-                        <strong>2, 6, 11, 15, 20, 24, 29, 30 मार्च।</strong><br>
-                        <em>(नोट: 14 से 13 अप्रैल तक खरमास है)</em>
+                        19 मार्च से हिन्दू नववर्ष और नवरात्रि का आरम्भ।<br>
+                        <strong>घटस्थापना मुहूर्त:</strong><br>
+                        प्रातः 06:25 से 10:40 तक।<br>
+                        (द्विस्वभाव लग्न में श्रेष्ठ)
                     </div>
                 </div>
 
@@ -582,30 +586,186 @@
                     <div class="box-content tight-text">
                         <ul style="padding-left:15px; margin:0; font-size:0.9rem; line-height:1.6;">
                             <li>03: होलिका दहन</li>
-                            <li>04: धुलंडी (होली)</li>
-                            <li>11: शीतला अष्टमी</li>
-                            <li>14: मीन संक्रांति</li>
-                            <li>19: हिंदू नववर्ष / गुड़ी पड़वा</li>
-                            <li>21: गणगौर पूजा</li>
+                            <li>04: होली (धुलंडी)</li>
+                            <li>08: शीतला सप्तमी</li>
+                            <li>14: पापमोचनी एकादशी</li>
+                            <li>19: गुड़ी पड़वा / नववर्ष</li>
                             <li>27: राम नवमी</li>
-                            <li>31: महावीर जयंती</li>
+                            <li>29: कामदा एकादशी</li>
                         </ul>
                     </div>
                 </div>
             </aside>
         </div>
 
-        <div class="footer-list">
-            <div class="f-item"><span style="color:red; font-weight:bold;">03:</span> होलिका दहन</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">04:</span> होली (रंगोत्सव)</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">11:</span> बसोड़ा</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">14:</span> मीन संक्रांति</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">19:</span> नवरात्रि प्रारंभ</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">21:</span> गणगौर</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">27:</span> राम नवमी</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">31:</span> महावीर जयंती</div>
+        <div class="footer-horoscope">
+            <div class="horoscope-title">卐 वार्षिक राशिफल 2026: सभी 12 राशियों का विस्तृत भविष्यफल 卐</div>
+            
+            <div class="rashi-grid">
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M12 2C8 2 4 5 4 9c0 4.4 3.6 8 8 8s8-3.6 8-8c0-4-4-7-8-7zm0 13c-2.8 0-5-2.2-5-5s2.2-5 5-5 5 2.2 5 5-2.2 5-5 5z"/><path d="M12 4.5C9.5 4.5 7.5 6.5 7.5 9h-2c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5h-2c0-2.5-2-4.5-4.5-4.5z"/></svg>
+                        मेष (Aries)
+                    </div>
+                    <div class="rashi-body">
+                        वर्ष 2026 में ऊर्जा और उत्साह चरम पर रहेगा।
+                        <span class="rh-sub c-blue">✦ करियर व व्यापार:</span> मई के बाद नई नौकरी और पदोन्नति के प्रबल योग हैं। व्यापार में जोखिम लेने से लाभ होगा।
+                        <span class="rh-sub c-green">✦ आर्थिक स्थिति:</span> धन का आगमन अच्छा रहेगा, लेकिन खर्च भी बढ़ेंगे।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> प्रत्येक मंगलवार को हनुमान चालीसा का पाठ करें और सिंदूर चढ़ाएं।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><circle cx="12" cy="14" r="6"/><path d="M12 4c-4.4 0-8 3.6-8 8h2c0-3.3 2.7-6 6-6s6 2.7 6 6h2c0-4.4-3.6-8-8-8z"/></svg>
+                        वृषभ (Taurus)
+                    </div>
+                    <div class="rashi-body">
+                        स्थायित्व और समृद्धि के लिए यह वर्ष उत्तम है।
+                        <span class="rh-sub c-blue">✦ करियर:</span> कार्यस्थल पर मान-सम्मान बढ़ेगा। विदेश यात्रा के योग हैं।
+                        <span class="rh-sub c-purple">✦ परिवार:</span> घर में नए सदस्य का आगमन या विवाह का मंगल कार्य होगा।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> शुक्रवार को सफेद मिठाई या खीर का दान करें।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M6 4h12v2H6V4zm2 4h2v12H8V8zm6 0h2v12h-2V8zm-6 14h12v-2H6v2z"/></svg>
+                        मिथुन (Gemini)
+                    </div>
+                    <div class="rashi-body">
+                        बुद्धि और वाणी के दम पर बिगड़े काम बनेंगे।
+                        <span class="rh-sub c-green">✦ आर्थिक:</span> आय के नए स्रोत खुलेंगे। शेयर बाजार से लाभ संभव है।
+                        <span class="rh-sub c-purple">✦ प्रेम व संबंध:</span> रिश्तों में मधुरता आएगी, लेकिन वाणी पर संयम रखें।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> बुधवार को गणेश जी को 11 दूर्वा अर्पित करें।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm-2 15c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3zm4-6c-1.7 0-3-1.3-3-3s1.3-3 3-3 3 1.3 3 3-1.3 3-3 3z"/></svg>
+                        कर्क (Cancer)
+                    </div>
+                    <div class="rashi-body">
+                        भावनात्मक रूप से यह वर्ष मिश्रित परिणाम देगा।
+                        <span class="rh-sub c-green">✦ संपत्ति:</span> भूमि और वाहन खरीदने के लिए जुलाई के बाद का समय श्रेष्ठ है।
+                        <span class="rh-sub c-red">✦ स्वास्थ्य:</span> पेट और आँखों से जुड़ी समस्याएं हो सकती हैं।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> सोमवार को शिवलिंग पर कच्चा दूध चढ़ाएं।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><circle cx="8" cy="12" r="4"/><path d="M12 12c0 2.2 1.8 4 4 4s4-1.8 4-4-1.8-4-4-4M18 4c-2.2 0-4 1.8-4 4"/></svg>
+                        सिंह (Leo)
+                    </div>
+                    <div class="rashi-body">
+                        राजा की तरह मान-सम्मान और अधिकार बढ़ेंगे।
+                        <span class="rh-sub c-blue">✦ करियर:</span> सरकारी कार्यों में अटकी फाइलें पास होंगी। राजनीति में सफलता।
+                        <span class="rh-sub c-green">✦ धन:</span> निवेश से दीर्घकालिक लाभ मिलेगा।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> नित्य सूर्य देव को जल में रोली मिलाकर अर्घ्य दें।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M18 4v2h-2v6c0 1.1-.9 2-2 2s-2-.9-2-2V6h-2v6c0 1.1-.9 2-2 2s-2-.9-2-2V6H4v6c0 3.3 2.7 6 6 6 1.3 0 2.5-.4 3.5-1.1.7 1.7 2.4 2.9 4.5 3.1V22h2v-2c0-2.2-1.8-4-4-4-.7 0-1.3.2-1.9.5-.4-.9-1.2-1.6-2.1-2 .9-.4 1.7-1.1 2.1-2 .6-.3 1.2-.5 1.9-.5z"/></svg>
+                        कन्या (Virgo)
+                    </div>
+                    <div class="rashi-body">
+                        मेहनत का पूरा फल मिलेगा, कर्ज से मुक्ति मिलेगी।
+                        <span class="rh-sub c-blue">✦ व्यापार:</span> साझेदारी में किया गया व्यापार लाभ देगा।
+                        <span class="rh-sub c-blue">✦ शिक्षा:</span> विद्यार्थियों को प्रतियोगी परीक्षाओं में सफलता मिलेगी।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> गाय को हरा चारा खिलाएं और मूंग दाल का दान करें।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M4 18h16v2H4zm8-12c-3.3 0-6 2.7-6 6h2c0-2.2 1.8-4 4-4s4 1.8 4 4h2c0-3.3-2.7-6-6-6zM4 14h16v2H4z"/></svg>
+                        तुला (Libra)
+                    </div>
+                    <div class="rashi-body">
+                        सुख-सुविधाओं और लग्जरी में वृद्धि होगी।
+                        <span class="rh-sub c-green">✦ आर्थिक:</span> आय बढ़ेगी परन्तु विलासिता पर खर्च भी अधिक होगा।
+                        <span class="rh-sub c-purple">✦ प्रेम:</span> प्रेम विवाह के प्रबल योग बन रहे हैं।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> शुक्रवार को लक्ष्मी जी की आरती करें और इत्र का प्रयोग करें।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M18 4v2h-2v6c0 1.1-.9 2-2 2s-2-.9-2-2V6h-2v6c0 1.1-.9 2-2 2s-2-.9-2-2V6H4v6c0 3.3 2.7 6 6 6 2.8 0 5.1-1.9 5.8-4.5.4.3.9.5 1.4.5h.8v2l3-1.5L18 18v-2h-.8c-1.1 0-2-.9-2-2s.9-2 2-2h2V4h-2z"/></svg>
+                        वृश्चिक (Scorpio)
+                    </div>
+                    <div class="rashi-body">
+                        संघर्ष के बाद बड़ी जीत आपकी होगी।
+                        <span class="rh-sub c-blue">✦ करियर:</span> कार्यक्षेत्र में गुप्त शत्रुओं से सावधान रहें, जीत आपकी ही होगी।
+                        <span class="rh-sub c-red">✦ सावधानी:</span> वाहन चलाते समय गति पर नियंत्रण रखें।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> मंगलवार को हनुमान जी को चोला चढ़ाएं।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M19 5v6h-2V7.4l-6.3 6.3-1.4-1.4L15.6 6H12V4h7v1zm-7 8l-6 6-1.4-1.4 6-6 1.4 1.4z"/></svg>
+                        धनु (Sagittarius)
+                    </div>
+                    <div class="rashi-body">
+                        भाग्य का पूरा साथ मिलेगा, अध्यात्म में रूचि बढ़ेगी।
+                        <span class="rh-sub c-blue">✦ व्यवसाय:</span> सोने-चांदी और शिक्षा से जुड़े लोगों को विशेष लाभ।
+                        <span class="rh-sub c-purple">✦ परिवार:</span> पिता का सहयोग और पैतृक संपत्ति मिल सकती है।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> गुरुवार को केले के वृक्ष की पूजा करें और पीले वस्त्र पहनें।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M16 6c0-2.2-1.8-4-4-4s-4 1.8-4 4c0 1.7 1 3.1 2.5 3.7L9 16l2 2 3-8c1.3-.2 2.3-1.2 2.3-2.6-.1-.8-.4-1.5-.9-2 .5-.5 1.2-.9 2-.9s1.5.4 2 .9V6zM6 16c0 2.2 1.8 4 4 4s4-1.8 4-4"/></svg>
+                        मकर (Capricorn)
+                    </div>
+                    <div class="rashi-body">
+                        शनि का प्रभाव रहेगा, धैर्य और मेहनत ही सफलता की कुंजी है।
+                        <span class="rh-sub c-blue">✦ करियर:</span> काम का बोझ अधिक रहेगा, लेकिन यह भविष्य सुधारेगा।
+                        <span class="rh-sub c-green">✦ धन:</span> रुका हुआ पैसा वापस आने की संभावना है।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> शनिवार को शनि मंदिर में छाया दान करें (तेल में चेहरा देखकर)।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M2 12l2-2 4 4 4-4 4 4 4-4 2 2-6 6-4-4-4 4-6-6zm0-6l2-2 4 4 4-4 4 4 4-4 2 2-6 6-4-4-4 4-6-6z"/></svg>
+                        कुम्भ (Aquarius)
+                    </div>
+                    <div class="rashi-body">
+                        नवाचार और तकनीक के क्षेत्र में बड़ी सफलता।
+                        <span class="rh-sub c-green">✦ आय:</span> आय के स्रोत स्थिर रहेंगे, निवेश सोच-समझकर करें।
+                        <span class="rh-sub c-red">✦ स्वास्थ्य:</span> पैरों में दर्द और वात रोगों से कष्ट हो सकता है।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> शनिवार को कुष्ठ रोगियों या गरीबों को भोजन कराएं।
+                    </div>
+                </div>
+
+                <div class="rashi-card">
+                    <div class="rashi-header">
+                        <svg class="zodiac-icon" viewBox="0 0 24 24"><path d="M12 2c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm0 14c2.2 0 4 1.8 4 4s-1.8 4-4 4-4-1.8-4-4 1.8-4 4-4zm-6-4c0 2.2-1.8 4-4 4V8c2.2 0 4 1.8 4 4zm16 0c0-2.2-1.8-4-4-4v8c2.2 0 4-1.8 4-4z"/></svg>
+                        मीन (Pisces)
+                    </div>
+                    <div class="rashi-body">
+                        स्थान परिवर्तन और विदेश यात्रा के लिए स्वर्णिम वर्ष।
+                        <span class="rh-sub c-blue">✦ करियर:</span> नौकरी में बदलाव या शहर बदलने के योग हैं जो शुभ रहेंगे।
+                        <span class="rh-sub c-purple">✦ खर्च:</span> धार्मिक यात्राओं और मांगलिक कार्यों पर धन खर्च होगा।
+                        <span class="rh-sub c-brown">✦ सटीक उपाय:</span> माथे पर नित्य केसर का तिलक लगाएं।
+                    </div>
+                </div>
+
+            </div>
+            
+            <div style="text-align:center; font-size:1rem; margin-top:15px; font-weight:bold; color:#d84315;">
+                ।। ॐ शुभम भवतु ।।
+            </div>
         </div>
     </div>
 
 </body>
 </html>
+
