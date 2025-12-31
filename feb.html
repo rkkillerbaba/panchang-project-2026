@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1400, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>फरवरी 2026 - पंचांग (Full Filled)</title>
+    <title>फरवरी 2026 - सम्पूर्ण पंचांग (All in One)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -70,7 +70,7 @@
         .main-container {
             display: grid;
             grid-template-columns: 270px 1fr 270px;
-            flex-grow: 1;
+            /* flex-grow removed to allow content to stack naturally */
         }
 
         /* SIDEBARS */
@@ -112,7 +112,7 @@
         .rashi-list li { margin-bottom: 5px; border-bottom: 1px dotted #ccc; padding-bottom: 2px; }
         .rashi-name { font-weight: bold; color: #d84315; }
 
-        /* CALENDAR GRID - FIXED */
+        /* CALENDAR GRID */
         .cal-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -125,7 +125,7 @@
         .day-name { background: #3e2723; color: white; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: bold; text-transform: uppercase; }
         .day-name.sun { background: #d50000; }
 
-        /* DATE CELLS - FIXED */
+        /* DATE CELLS */
         .date-cell {
             background: #fff;
             height: 100%; 
@@ -171,21 +171,102 @@
         .blue-text { color: #0d47a1; }
         .saffron-text { color: #e65100; }
 
-        /* FOOTER */
-        .footer-list {
-            padding: 12px;
-            background: #ffe0b2;
+        /* FOOTER STYLES */
+        .footer-full-year {
+            background-color: #fff3e0;
+            border-top: 5px solid #ff6f00;
+            padding: 20px;
             display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 15px;
-            font-size: 0.9rem;
-            border-top: 4px solid #ff9800;
+            flex-direction: column;
+            gap: 25px; /* Increased gap between rows */
         }
-        .f-item { border-bottom: 1px dashed #d84315; padding-bottom: 4px; }
 
-        /* Helpers */
-        .tight-text { font-size: 0.85rem; }
+        .year-header-title {
+            text-align: center;
+            color: #b71c1c;
+            font-size: 2rem;
+            font-weight: bold;
+            font-family: 'Oswald', sans-serif;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            text-decoration: underline wavy #ff9800;
+        }
+        
+        /* Sub-header for the new section */
+        .section-separator {
+            text-align: center;
+            margin-top: 10px;
+            margin-bottom: 5px;
+            border-top: 2px dashed #bf360c;
+            padding-top: 20px;
+        }
+        .section-separator h3 {
+            color: #d84315;
+            font-size: 1.8rem;
+            font-family: 'Oswald', sans-serif;
+            background: #fff;
+            display: inline-block;
+            padding: 0 15px;
+            margin-top: -35px; /* Pulls text up into the border */
+        }
+
+        .year-grid-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .info-card {
+            background: #fff;
+            border: 2px solid #ffcc80;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+        }
+
+        .info-head {
+            background: #e65100;
+            color: white;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: bold;
+            padding: 8px;
+        }
+        /* Existing Colors */
+        .info-head.vivah { background: #c62828; }
+        .info-head.griha { background: #1565c0; }
+        .info-head.misc { background: #2e7d32; }
+
+        /* New Colors for Added Section */
+        .info-head.krishi { background: #2e7d32; border-bottom: 3px solid #1b5e20; }
+        .info-head.property { background: #6a1b9a; border-bottom: 3px solid #4a148c; }
+        .info-head.vyapar { background: #00838f; border-bottom: 3px solid #006064; }
+
+        .info-body {
+            padding: 15px;
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .info-body p { margin-bottom: 10px; text-align: justify; }
+        .month-highlight { color: #d50000; font-weight: bold; }
+        
+        .shubh-list li { margin-bottom: 5px; list-style-type: square; margin-left: 15px; }
+
+        .note-strip {
+            background: #3e2723;
+            color: #ffeb3b;
+            text-align: center;
+            padding: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
         .highlight-box { background: #fffde7; padding: 2px 5px; border-radius: 3px; }
 
     </style>
@@ -530,17 +611,143 @@
             </aside>
         </div>
 
-        <div class="footer-list">
-            <div class="f-item"><span style="color:red; font-weight:bold;">01:</span> माघ पूर्णिमा</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">04:</span> संकष्टी चतुर्थी</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">12:</span> विजया एकादशी</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">13:</span> कुम्भ संक्रांति</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">16:</span> महाशिवरात्रि (व्रत)</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">19:</span> शिवाजी जयंती</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">26:</span> रंगभरी एकादशी</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">28:</span> शनि प्रदोष</div>
+        <div class="footer-full-year">
+            <div class="year-header-title">卐 वर्ष 2026: संपूर्ण वर्ष के मांगलिक मुहूर्त एवं शुभ तिथियां 卐</div>
+            
+            <div class="year-grid-container">
+                <div class="info-card">
+                    <div class="info-head vivah"><i class="fas fa-heart"></i> विवाह मुहूर्त 2026</div>
+                    <div class="info-body">
+                        <p>वर्ष 2026 में शुक्र और गुरु के शुभ प्रभाव के कारण विवाह के लिए प्रचुर मात्रा में शुभ तिथियां उपलब्ध हैं। नीचे मास के अनुसार विवरण है:</p>
+                        <ul class="shubh-list">
+                            <li><span class="month-highlight">जनवरी-फरवरी:</span> वर्ष की शुरुआत में मकर संक्रांति के बाद विवाह के उत्तम योग हैं (माघ मास)।</li>
+                            <li><span class="month-highlight">मार्च-अप्रैल:</span> 14 मार्च से 13 अप्रैल तक 'खरमास' रहेगा, जिसमें विवाह वर्जित हैं। इसके बाद 15 अप्रैल से पुनः शहनाइयां बजेंगी।</li>
+                            <li><span class="month-highlight">मई-जून:</span> मई और जून में सर्वाधिक लगन तिथियां हैं (वैशाख-ज्येष्ठ)।</li>
+                            <li><span class="month-highlight">चातुर्मास (जुलाई-अक्टूबर):</span> देवशयनी एकादशी (जुलाई) से देवउठनी एकादशी (नवंबर) तक विवाह कार्य रुकेंगे।</li>
+                            <li><span class="month-highlight">नवंबर-दिसंबर:</span> देवउठनी एकादशी के बाद साल के अंत तक विवाह के प्रबल योग रहेंगे।</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-head griha"><i class="fas fa-home"></i> गृह प्रवेश 2026</div>
+                    <div class="info-body">
+                        <p>नवनिर्मित भवन में प्रवेश के लिए 2026 में विशेष नक्षत्रों का संयोग बन रहा है। वास्तु शांति और गृह प्रवेश के लिए सर्वश्रेष्ठ माह:</p>
+                        <ul class="shubh-list">
+                            <li><span class="month-highlight">माघ (जनवरी-फरवरी):</span> कुम्भ का सूर्य होने पर गृह प्रवेश धन-धान्य बढ़ाता है।</li>
+                            <li><span class="month-highlight">फाल्गुन (फरवरी-मार्च):</span> यह माह संतान सुख और वैभव के लिए उत्तम माना गया है।</li>
+                            <li><span class="month-highlight">वैशाख (अप्रैल-मई):</span> अक्षय तृतीया के आसपास गृह प्रवेश अत्यंत शुभ है।</li>
+                            <li><span class="month-highlight">ज्येष्ठ (मई-जून):</span> बड़े पुत्र या पुत्री के न होने पर ही शुभ है।</li>
+                            <li><span class="month-highlight">कार्तिक-मार्गशीर्ष (नवंबर-दिसंबर):</span> दीपावली के बाद गृह प्रवेश शुभ रहता है।</li>
+                        </ul>
+                        <p style="font-size:0.85rem; color:#b71c1c;"><strong>सावधानी:</strong> चैत्र, आषाढ़, श्रावण, भाद्रपद, आश्विन और पौष मास में गृह प्रवेश सामान्यतः वर्जित माना जाता है।</p>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-head misc"><i class="fas fa-calendar-check"></i> अन्य शुभ कार्य व वर्जित काल</div>
+                    <div class="info-body">
+                        <p><strong>मुंडन संस्कार:</strong> चैत्र (मार्च-अप्रैल), वैशाख (अप्रैल-मई) और ज्येष्ठ (मई-जून) माह में उत्तरायण सूर्य के समय मुंडन, जनेऊ संस्कार श्रेष्ठ फल देते हैं।</p>
+                        <hr style="margin:10px 0; border-top:1px dashed #ccc;">
+                        <p><strong>वाहन व संपत्ति क्रय:</strong> प्रत्येक माह के 'सर्वार्थ सिद्धि योग', 'पुष्य नक्षत्र' और 'अमृत सिद्धि योग' में वाहन खरीदना, जमीन की रजिस्ट्री कराना लाभदायी रहेगा।</p>
+                        <hr style="margin:10px 0; border-top:1px dashed #ccc;">
+                        <p style="color:#d50000; font-weight:bold;">वर्ष 2026 के प्रमुख वर्जित काल (शुभ कार्य न करें):</p>
+                        <ul class="shubh-list" style="font-size:0.9rem;">
+                            <li><strong>खरमास 1:</strong> 14 जनवरी तक।</li>
+                            <li><strong>होलाष्टक:</strong> 24 फरवरी से 3 मार्च (होली तक)।</li>
+                            <li><strong>खरमास 2:</strong> 14 मार्च से 13 अप्रैल तक (मीन संक्रांति)।</li>
+                            <li><strong>चातुर्मास:</strong> जुलाई से नवंबर (विष्णु शयन)।</li>
+                            <li><strong>खरमास 3:</strong> 16 दिसंबर 2026 से।</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-separator">
+                <h3>कृषि, संपत्ति व व्यापार मुहूर्त 2026</h3>
+            </div>
+
+            <div class="year-grid-container">
+                <div class="info-card">
+                    <div class="info-head krishi"><i class="fas fa-seedling"></i> कृषि मुहूर्त (खेती-बाड़ी)</div>
+                    <div class="info-body">
+                        <p>वर्ष 2026 में अच्छी फसल और पैदावार के लिए बीज रोपण और कटाई के लिए विशेष नक्षत्रों का ध्यान रखें:</p>
+                        <ul class="shubh-list">
+                            <li><span class="month-highlight">बीज रोपण (Sowing):</span>
+                                <ul>
+                                    <li><strong>जनवरी:</strong> 2, 3, 5, 7, 10, 11, 12, 13 (रबी फसल हेतु)।</li>
+                                    <li><strong>फरवरी:</strong> 5, 6, 8, 9, 11, 14, 15 (सब्जियों व वसंत कालीन खेती)।</li>
+                                    <li><strong>मई-जून:</strong> 1, 4, 13 (मई) और 17, 24 (जून) खरीफ की बुवाई के लिए उत्तम।</li>
+                                </ul>
+                            </li>
+                            <hr style="margin:5px 0;">
+                            <li><span class="month-highlight">फसल कटाई (Harvesting):</span>
+                                <ul>
+                                    <li><strong>शुभ वार:</strong> सोम, बुध, गुरु और शुक्र।</li>
+                                    <li><strong>सावधानी:</strong> 'भरणी', 'कृत्तिका', 'आर्द्रा' और 'आश्लेषा' नक्षत्र में फसल न काटें, इससे अनाज में कीड़े लगने का भय रहता है।</li>
+                                    <li><strong>शुभ नक्षत्र:</strong> रोहिणी, पुष्य, उत्तरा फाल्गुनी और हस्त नक्षत्र कटाई के लिए श्रेष्ठ हैं।</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-head property"><i class="fas fa-building"></i> संपत्ति क्रय-विक्रय (Property)</div>
+                    <div class="info-body">
+                        <p>जमीन, प्लॉट या बना हुआ मकान खरीदने और बेचने (रजिस्ट्री) के लिए 2026 के सिद्ध मुहूर्त:</p>
+                        <ul class="shubh-list">
+                            <li><span class="month-highlight">खरीदने (Buying) के योग:</span>
+                                <ul>
+                                    <li><strong>जनवरी:</strong> 1, 2, 8, 23, 29 (मृगशिरा नक्षत्र)।</li>
+                                    <li><strong>फरवरी-मार्च:</strong> 12, 19, 26 फरवरी और 12, 26 मार्च (गुरु पुष्य योग का लाभ लें)।</li>
+                                    <li><strong>मई:</strong> 14 मई (अक्षय तृतीया) सबसे उत्तम दिन है।</li>
+                                    <li><strong>जून:</strong> 18, 19, 25, 26 तारीख शुभ है।</li>
+                                    <li><strong>अक्टूबर-नवंबर:</strong> दीपावली के आसपास संपत्ति खरीदना लक्ष्मी कारक है।</li>
+                                </ul>
+                            </li>
+                            <hr style="margin:5px 0;">
+                            <li><span class="month-highlight">बेचने (Selling) के योग:</span>
+                                <ul>
+                                    <li>जून 2026 के बाद संपत्ति बेचना अधिक मुनाफा देगा। विशेषकर बुधवार और बृहस्पतिवार को बयाना लेना शुभ रहेगा।</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <div class="info-head vyapar"><i class="fas fa-briefcase"></i> नवीन व्यापार व वाहन सुख</div>
+                    <div class="info-body">
+                        <p>नया बिज़नेस शुरू करने, दुकान खोलने और वाहन खरीदने के लिए 2026 की शुभ गाइड:</p>
+                        <ul class="shubh-list">
+                            <li><span class="month-highlight">नया व्यापार (Startups):</span>
+                                <ul>
+                                    <li><strong>जनवरी:</strong> 23, 28 (सर्वार्थ सिद्धि योग)।</li>
+                                    <li><strong>फरवरी:</strong> 7, 20, 21 (वसंत पंचमी के बाद)।</li>
+                                    <li><strong>अप्रैल:</strong> 15 अप्रैल के बाद (नव संवत्सर)।</li>
+                                    <li><strong>शुभ दिन:</strong> नया खाता बही या दुकान का उद्घाटन 'शुक्ल पक्ष' के गुरुवार या शुक्रवार को करें।</li>
+                                </ul>
+                            </li>
+                            <hr style="margin:5px 0;">
+                            <li><span class="month-highlight">वाहन खरीद (Vehicle):</span>
+                                <ul>
+                                    <li><strong>उत्तम माह:</strong> फरवरी, मई और अक्टूबर (दशहरा-दीपावली)।</li>
+                                    <li><strong>वर्जित:</strong> पंचक और शनिवार को लोहे का वाहन खरीदने से बचें।</li>
+                                    <li><strong>शुभ तिथियां:</strong> 1, 5, 12, 21, 28 (मासिक गणना अनुसार)।</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="note-strip">
+                विशेष: यह सामान्य पंचांग विवरण है। किसी भी विशिष्ट कार्य से पूर्व अपने स्थानीय विद्वान ज्योतिषी से अपनी कुंडली अनुसार मुहूर्त अवश्य निकलवाएं।
+            </div>
         </div>
     </div>
 
 </body>
 </html>
+
