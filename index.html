@@ -22,9 +22,8 @@
         body {
             background: var(--dark-bg);
             font-family: 'Tiro Devanagari Hindi', serif;
-            /* सुधार: height को auto किया और min-height 100vh किया */
             min-height: 100vh;
-            /* सुधार: स्क्रॉलिंग चालू की ताकि फुटर कटे नहीं */
+            margin: 0;
             overflow-y: auto; 
             overflow-x: hidden;
         }
@@ -32,17 +31,16 @@
         /* ================= INTRO SCREEN ================= */
 
         #intro-screen {
-            /* सुधार: min-height ताकि कंटेंट ज्यादा हो तो पेज लंबा हो जाए */
-            min-height: 100vh;
             width: 100%;
+            min-height: 100vh; 
             display: flex;
             flex-direction: column;
             align-items: center;
-            /* सुधार: space-between ताकि फुटर हमेशा नीचे रहे, लेकिन कंटेंट ज्यादा हो तो चिपके नहीं */
-            justify-content: space-between; 
+            justify-content: flex-start;
+            gap: 15px; 
             background: radial-gradient(circle at center, var(--rich-red) 0%, var(--dark-bg) 95%);
             border: 6px solid var(--saffron);
-            padding: 10px 5px 20px 5px; /* नीचे पैडिंग दी ताकि फुटर बॉर्डर से न चिपके */
+            padding: 10px 5px 40px 5px; 
         }
 
         /* -------- HEADER -------- */
@@ -53,12 +51,12 @@
         }
 
         .divine-om {
-            font-size: 4rem; /* मोबाइल के लिए थोड़ा एडजस्ट किया */
+            font-size: 4rem;
             color: var(--saffron);
             line-height: 0.8; 
             text-shadow: 0 0 20px rgba(255, 153, 51, 0.7);
             animation: pulseGlow 4s infinite alternate;
-            margin-bottom: 2px;
+            margin-bottom: 5px;
         }
 
         .top-invocation {
@@ -85,9 +83,8 @@
         .ganesh-box img {
             height: auto;
             width: auto;
-            /* मोबाइल फ्रेंडली साइज */
             max-height: 180px; 
-            max-width: 80%;
+            max-width: 85%;
             object-fit: contain;
             filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.5));
             animation: float 6s ease-in-out infinite;
@@ -98,7 +95,6 @@
         .titles-container {
             text-align: center;
             flex-shrink: 0;
-            margin-bottom: 10px;
         }
 
         .main-heading {
@@ -121,27 +117,28 @@
             display: inline-block;
         }
 
-        /* ================= BUTTONS ================= */
+        /* ================= BUTTONS (Links) ================= */
 
         .months-wrapper {
-            width: 98%; /* मोबाइल पर फुल विड्थ */
+            width: 98%;
             max-width: 500px;
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid var(--gold);
             border-radius: 12px;
             padding: 8px;
             backdrop-filter: blur(5px);
-            margin-bottom: 10px;
+            flex-shrink: 0;
         }
 
         .month-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 6px;
+            gap: 8px;
         }
 
+        /* BUTTON STYLE UPDATED FOR LINKS <a> */
         .month-btn {
-            padding: 8px 0;
+            padding: 10px 0;
             font-size: 1rem; 
             font-weight: 900; 
             text-align: center;
@@ -152,6 +149,12 @@
             border: 1px solid var(--saffron);
             box-shadow: 0 2px 5px rgba(0,0,0,0.6);
             font-family: 'Tiro Devanagari Hindi', serif;
+            
+            /* लिंक के लिए जरूरी */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; /* अंडरलाइन हटाई */
         }
         
         .month-btn:active { transform: scale(0.95); }
@@ -165,20 +168,20 @@
             justify-content: center;
             text-align: center;
             width: 100%;
-            gap: 8px; 
+            gap: 10px; 
             padding: 5px;
-            margin-bottom: 10px;
+            flex-shrink: 0;
         }
 
         .holy-mantra {
             font-family: 'Martel', serif;
-            font-size: 1rem; 
+            font-size: 1.1rem; 
             color: var(--gold);
             font-weight: 900; 
             line-height: 1.4;
             text-shadow: 1px 1px 3px black;
             background: rgba(0,0,0,0.3); 
-            padding: 8px;
+            padding: 10px;
             border-radius: 10px;
             border: 1px solid rgba(255, 215, 0, 0.2);
             width: 95%;
@@ -195,17 +198,17 @@
 
         .mantra-container {
             width: 100%;
-            padding: 10px 5px;
+            padding: 15px 5px;
             text-align: center;
             background: linear-gradient(to top, rgba(0,0,0,1), transparent);
             border-top: 1px solid rgba(255, 215, 0, 0.4);
             flex-shrink: 0;
-            /* यह बॉक्स अब पेज के अंत में रहेगा */
+            margin-top: auto; 
         }
 
         .sanskrit-shloka {
             font-family: 'Martel', serif;
-            font-size: 1.1rem; 
+            font-size: 1.2rem; 
             line-height: 1.3;
             color: var(--gold);
             text-shadow: 1px 1px 3px black;
@@ -213,8 +216,8 @@
         }
 
         .mantra-meaning {
-            font-size: 0.85rem; 
-            margin-top: 4px;
+            font-size: 0.9rem; 
+            margin-top: 5px;
             color: #ccc;
             font-style: italic;
             font-weight: 500;
@@ -235,29 +238,7 @@
             50% { opacity: 1; transform: scale(1.01); text-shadow: 0 0 10px var(--saffron); }
         }
 
-        /* ================= CALENDAR SECTION ================= */
-
-        .calendar-section { display: none; min-height: 100vh; background: #424242; }
-        .calendar-section.active { display: block; overflow-y: auto; }
-
-        .back-btn {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            padding: 12px 25px;
-            border-radius: 50px;
-            border: 2px solid var(--gold);
-            background: var(--rich-red);
-            color: #fff;
-            font-size: 1.2rem; 
-            font-weight: 900;
-            display: none;
-            z-index: 100;
-            box-shadow: 0 5px 15px black;
-        }
-
-        /* ================= MOBILE SPECIFIC ADJUSTMENTS ================= */
-        /* बहुत छोटी स्क्रीन (जैसे iPhone SE) के लिए */
+        /* Mobile specific adjustments */
         @media (max-height: 700px) {
             .ganesh-box img { max-height: 140px; }
             .divine-om { font-size: 3rem; }
@@ -288,18 +269,18 @@
 
         <div class="months-wrapper">
             <div class="month-grid">
-                <div class="month-btn" onclick="openMonth('jan')">जनवरी</div>
-                <div class="month-btn" onclick="openMonth('feb')">फरवरी</div>
-                <div class="month-btn" onclick="openMonth('mar')">मार्च</div>
-                <div class="month-btn" onclick="openMonth('apr')">अप्रैल</div>
-                <div class="month-btn" onclick="openMonth('may')">मई</div>
-                <div class="month-btn" onclick="openMonth('jun')">जून</div>
-                <div class="month-btn" onclick="openMonth('jul')">जुलाई</div>
-                <div class="month-btn" onclick="openMonth('aug')">अगस्त</div>
-                <div class="month-btn" onclick="openMonth('sep')">सितम्बर</div>
-                <div class="month-btn" onclick="openMonth('oct')">अक्टूबर</div>
-                <div class="month-btn" onclick="openMonth('nov')">नवंबर</div>
-                <div class="month-btn" onclick="openMonth('dec')">दिसंबर</div>
+                <a href="jan.html" class="month-btn">जनवरी</a>
+                <a href="feb.html" class="month-btn">फरवरी</a>
+                <a href="mar.html" class="month-btn">मार्च</a>
+                <a href="apr.html" class="month-btn">अप्रैल</a>
+                <a href="may.html" class="month-btn">मई</a>
+                <a href="jun.html" class="month-btn">जून</a>
+                <a href="jul.html" class="month-btn">जुलाई</a>
+                <a href="aug.html" class="month-btn">अगस्त</a>
+                <a href="sep.html" class="month-btn">सितम्बर</a>
+                <a href="oct.html" class="month-btn">अक्टूबर</a>
+                <a href="nov.html" class="month-btn">नवंबर</a>
+                <a href="dec.html" class="month-btn">दिसंबर</a>
             </div>
         </div>
 
@@ -327,47 +308,6 @@
 
     </div>
 
-    <button class="back-btn" id="homeBtn" onclick="goHome()">
-        <i class="fas fa-home"></i> होम
-    </button>
-
-    <div id="jan" class="calendar-section">
-        <h2 style="color:white;text-align:center;padding-top:50px;">जनवरी कैलेंडर लोड करें...</h2>
-    </div>
-    <div id="feb" class="calendar-section"></div>
-    <div id="mar" class="calendar-section"></div>
-    <div id="apr" class="calendar-section"></div>
-    <div id="may" class="calendar-section"></div>
-    <div id="jun" class="calendar-section"></div>
-    <div id="jul" class="calendar-section"></div>
-    <div id="aug" class="calendar-section"></div>
-    <div id="sep" class="calendar-section"></div>
-    <div id="oct" class="calendar-section"></div>
-    <div id="nov" class="calendar-section"></div>
-    <div id="dec" class="calendar-section"></div>
-
-    <script>
-        function openMonth(id){
-            document.getElementById('intro-screen').style.display = 'none';
-            // Scroll ON for calendar
-            document.body.style.overflow = 'auto'; 
-            document.querySelectorAll('.calendar-section').forEach(d => d.classList.remove('active'));
-            
-            var monthDiv = document.getElementById(id);
-            if(monthDiv) monthDiv.classList.add('active');
-            
-            document.getElementById('homeBtn').style.display = 'block';
-            window.scrollTo(0, 0);
-        }
-
-        function goHome(){
-            document.getElementById('intro-screen').style.display = 'flex';
-            // Scroll ON for intro screen too (mobile friendly fix)
-            document.body.style.overflow = 'auto';
-            document.querySelectorAll('.calendar-section').forEach(d => d.classList.remove('active'));
-            document.getElementById('homeBtn').style.display = 'none';
-        }
-    </script>
-
 </body>
 </html>
+
