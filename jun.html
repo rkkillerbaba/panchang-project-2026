@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1400, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>जून 2026 - पंचांग</title>
+    <title>जून 2026 - पंचांग (सही फोटो सहित)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -129,7 +129,7 @@
         .date-cell {
             background: #fff;
             height: 100%; 
-            padding: 8px;
+            padding: 5px;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -143,33 +143,51 @@
 
         .num {
             font-family: 'Oswald', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             color: #333;
             text-align: right;
-            line-height: 0.9;
+            line-height: 1;
             position: absolute;
-            top: 5px;
-            right: 10px;
+            top: 2px;
+            right: 5px;
             z-index: 2;
         }
         .sunday .num { color: #b71c1c; }
 
+        /* IMAGE STYLES */
+        .evt-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%; /* Circular Image */
+            border: 2px solid var(--saffron);
+            margin-top: 5px;
+            margin-left: 5px;
+            z-index: 1;
+            opacity: 1;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            background: #fff;
+        }
+
         .events {
-            margin-top: 55px;
-            font-size: 0.9rem;
+            margin-top: auto; 
+            font-size: 0.85rem;
             font-weight: 600;
             z-index: 5;
             position: relative;
+            padding-bottom: 2px;
         }
         
-        .evt-row { display: block; margin-top: 4px; line-height: 1.25; border-left: 3px solid transparent; padding-left: 4px; }
+        .evt-row { display: block; margin-top: 2px; line-height: 1.2; border-left: 3px solid transparent; padding-left: 3px; }
         .evt-row.red-text { border-left-color: #d50000; }
         .evt-row.blue-text { border-left-color: #0d47a1; }
         
         .red-text { color: #d50000; }
         .blue-text { color: #0d47a1; }
         .saffron-text { color: #e65100; }
+        
+        .highlight-box { background: #fffde7; padding: 1px 4px; border-radius: 3px; }
 
         /* FOOTER */
         .footer-list {
@@ -186,7 +204,6 @@
 
         /* Helpers */
         .tight-text { font-size: 0.85rem; }
-        .highlight-box { background: #fffde7; padding: 2px 5px; border-radius: 3px; }
 
     </style>
 </head>
@@ -211,28 +228,27 @@
                 <div class="box">
                     <div class="box-head">मास विचार (जून)</div>
                     <div class="box-content tight-text">
-                        <strong>सूर्य:</strong> 15 जून को मिथुन राशि में प्रवेश (मिथुन संक्रांति)।<br>
-                        <strong>ऋतु:</strong> ग्रीष्म ऋतु का अंत, वर्षा ऋतु का आगमन।<br>
-                        <strong>मास:</strong> ज्येष्ठ (15 जून तक), फिर आषाढ़।
+                        <strong>सूर्य:</strong> 15 जून को मिथुन राशि में (मिथुन संक्रांति)।<br>
+                        <strong>अधिक मास:</strong> 15 जून को समाप्त।<br>
+                        <strong>मास:</strong> अधिक ज्येष्ठ (15 तक), फिर निज ज्येष्ठ (शुद्ध मास)।
                     </div>
                 </div>
                 
                 <div class="box">
-                    <div class="box-head red">विवाह मुहूर्त (अंतिम)</div>
+                    <div class="box-head red">विवाह मुहूर्त</div>
                     <div class="box-content tight-text">
-                        26 जून (देवशयनी एकादशी) से चातुर्मास शुरू, विवाह बंद। शुभ तिथियाँ:<br>
-                        <strong style="color:#b71c1c; font-size:1rem;">4, 5, 6, 8, 11, 12, 18, 19, 21, 22, 24, 25 जून।</strong><br>
-                        <hr style="margin:5px 0;">
-                        <em>(26 जून के बाद 4 माह तक विवाह वर्जित)</em>
+                        15 जून तक अधिक मास में विवाह वर्जित। 16 जून से शुभ मुहूर्त:<br>
+                        <strong style="color:#b71c1c; font-size:1rem;">18, 19, 21, 22, 24, 25 जून।</strong><br>
+                        <em>(जुलाई में विवाह कम हैं)</em>
                     </div>
                 </div>
 
                 <div class="box">
                     <div class="box-head blue">गृह प्रवेश मुहूर्त</div>
                     <div class="box-content tight-text">
-                        <strong>गृह प्रवेश:</strong> 5, 8, 12, 21, 24 जून।<br>
-                        <strong>मुंडन:</strong> 4, 8, 11, 18, 22 जून।<br>
-                        <strong>वाहन खरीद:</strong> 5, 10, 14, 19, 21, 25 जून।
+                        <strong>गृह प्रवेश:</strong> 17, 19, 22, 24 जून।<br>
+                        <strong>मुंडन:</strong> 17, 21, 25 जून।<br>
+                        <strong>वाहन खरीद:</strong> 17, 22, 24, 26, 29 जून।
                     </div>
                 </div>
 
@@ -240,40 +256,27 @@
                     <div class="box-head red">सरकारी छुट्टियाँ</div>
                     <div class="box-content tight-text">
                         <ul style="padding-left:15px; margin:0; line-height:1.6;">
-                            <li><strong>21 जून:</strong> अंतर्राष्ट्रीय योग दिवस</li>
-                            <li><strong>29 जून:</strong> आषाढ़ पूर्णिमा (गजेटेड)</li>
+                            <li><strong>26 जून:</strong> मोहर्रम (ताजिया)</li>
                         </ul>
                     </div>
                 </div>
 
                 <div class="box">
-                    <div class="box-head blue">ग्रह गोचर विचार</div>
+                    <div class="box-head blue">अधिक मास समाप्ति</div>
                     <div class="box-content tight-text">
-                        इस माह सूर्य और मंगल का राशि परिवर्तन होगा।<br>
-                        <strong>लाभ:</strong> मेष, सिंह और धनु राशि वालों को पदोन्नति और धन लाभ के प्रबल योग हैं।
-                    </div>
-                </div>
-
-                <div class="box">
-                    <div class="box-head red">अन्नप्राशन मुहूर्त</div>
-                    <div class="box-content tight-text">
-                        शिशु को पहली बार अनाज खिलाने के शुभ दिन:<br>
-                        <strong>3, 5, 8, 10, 12, 17, 19, 22, 24 जून।</strong>
-                    </div>
-                </div>
-
-                <div class="box">
-                    <div class="box-head blue">उपनयन (जनेऊ) संस्कार</div>
-                    <div class="box-content tight-text">
-                        यज्ञोपवीत संस्कार हेतु शुभ तिथियाँ:<br>
-                        <strong>4, 11, 18, 19, 21, 25 जून।</strong>
+                        15 जून को पुरुषोत्तम मास (मलमास) समाप्त होगा।<br>
+                        इसके बाद सभी मांगलिक कार्य (विवाह, मुंडन आदि) फिर से शुरू होंगे।
                     </div>
                 </div>
 
                 <div class="box fill">
-                    <div class="box-head red">वास्तु टिप्स (जल)</div>
+                    <div class="box-head blue">पंचक विचार</div>
                     <div class="box-content tight-text">
-                        भीषण गर्मी में घर की <strong>उत्तर दिशा</strong> में मिट्टी के घड़े में जल भरकर रखें। इससे घर में शीतलता बनी रहेगी और धन का आगमन बढ़ेगा। पक्षियों के लिए छत पर पानी जरूर रखें।
+                        <div style="margin-bottom:8px;">
+                            <strong>पंचक (Panchak):</strong><br>
+                            6 जून (सुबह 09:14) से<br>
+                            10 जून (दोपहर 03:55) तक।
+                        </div>
                     </div>
                 </div>
             </aside>
@@ -287,13 +290,11 @@
                 <div class="day-name">शुक्र</div>
                 <div class="day-name">शनि</div>
 
-                <div class="date-cell" style="background:transparent; border:none;"></div>
-
                 <div class="date-cell">
                     <div class="num">1</div>
                     <div class="events">
-                        <span class="evt-row">ज्येष्ठ कृष्ण प्रतिपदा</span>
-                        <span class="evt-row blue-text">नारद पूर्णिमा व्रत</span>
+                        <span class="evt-row blue-text">अधिक ज्येष्ठ कृष्ण 1</span>
+                        <span class="evt-row">सोमवार व्रत</span>
                     </div>
                 </div>
 
@@ -301,7 +302,7 @@
                     <div class="num">2</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण द्वितीया</span>
-                        <span class="evt-row">बड़ा मंगल</span>
+                        <span class="evt-row red-text">सत्यनारायण व्रत (अधिक)</span>
                     </div>
                 </div>
 
@@ -309,7 +310,7 @@
                     <div class="num">3</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण तृतीया</span>
-                        <span class="evt-row red-text">संकष्टी चतुर्थी</span>
+                        <span class="evt-row red-text">गणेश चतुर्थी व्रत</span>
                     </div>
                 </div>
 
@@ -317,28 +318,30 @@
                     <div class="num">4</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण चतुर्थी</span>
-                        <span class="evt-row">पंचक नहीं है</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">5</div>
                     <div class="events">
+                        <span class="evt-row blue-text">विश्व पर्यावरण दिवस</span>
                         <span class="evt-row">कृष्ण पंचमी</span>
-                        <span class="evt-row blue-text">विवाह मुहूर्त</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">6</div>
-                    <div class="events"><span class="evt-row">कृष्ण षष्ठी</span></div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण षष्ठी</span>
+                        <span class="evt-row red-text">पंचक प्रारंभ</span>
+                    </div>
                 </div>
 
                 <div class="date-cell sunday">
                     <div class="num">7</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण सप्तमी</span>
-                        <span class="evt-row red-text">भानु सप्तमी</span>
+                        <span class="evt-row">भानु सप्तमी</span>
                     </div>
                 </div>
 
@@ -346,25 +349,30 @@
                     <div class="num">8</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण अष्टमी</span>
-                        <span class="evt-row">कालाष्टमी</span>
+                        <span class="evt-row blue-text">कालाष्टमी</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">9</div>
-                    <div class="events"><span class="evt-row">कृष्ण नवमी</span></div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण नवमी</span>
+                    </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">10</div>
-                    <div class="events"><span class="evt-row">कृष्ण दशमी</span></div>
+                    <div class="events">
+                        <span class="evt-row">कृष्ण दशमी</span>
+                        <span class="evt-row blue-text">पंचक समाप्त</span>
+                    </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">11</div>
                     <div class="events">
-                        <span class="evt-row red-text highlight-box">योगिनी एकादशी</span>
-                        <span class="evt-row blue-text">सर्वार्थ सिद्धि योग</span>
+                        <span class="evt-row red-text highlight-box">कमला/पद्मिनी एकादशी</span>
+                        <span class="evt-row">(अधिक मास)</span>
                     </div>
                 </div>
 
@@ -372,7 +380,7 @@
                     <div class="num">12</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण द्वादशी</span>
-                        <span class="evt-row">प्रदोष व्रत</span>
+                        <span class="evt-row red-text">प्रदोष व्रत</span>
                     </div>
                 </div>
 
@@ -380,7 +388,7 @@
                     <div class="num">13</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण त्रयोदशी</span>
-                        <span class="evt-row red-text">मासिक शिवरात्रि</span>
+                        <span class="evt-row">शिव चतुर्दशी</span>
                     </div>
                 </div>
 
@@ -388,145 +396,144 @@
                     <div class="num">14</div>
                     <div class="events">
                         <span class="evt-row">कृष्ण चतुर्दशी</span>
-                        <span class="evt-row">दर्श अमावस्या</span>
+                        <span class="evt-row blue-text">विश्व रक्तदान दिवस</span>
                     </div>
                 </div>
 
                 <div class="date-cell holiday" style="background:#fffde7;">
                     <div class="num">15</div>
                     <div class="events">
-                        <span class="evt-row red-text" style="font-weight:bold;">ज्येष्ठ अमावस्या</span>
-                        <span class="evt-row blue-text">★ मिथुन संक्रांति</span>
-                        <span class="evt-row">स्नान-दान</span>
+                        <span class="evt-row red-text" style="font-weight:bold;">अधिक मास समाप्त</span>
+                        <span class="evt-row highlight-box">मिथुन संक्रांति</span>
+                        <span class="evt-row">सोमवती अमावस्या</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">16</div>
                     <div class="events">
-                        <span class="evt-row">आषाढ़ शुक्ल प्रतिपदा</span>
-                        <span class="evt-row highlight-box">गुप्त नवरात्रि प्रारंभ</span>
+                        <span class="evt-row blue-text" style="font-weight:bold;">निज ज्येष्ठ मास शुरू</span>
+                        <span class="evt-row">शुक्ल प्रतिपदा</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">17</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल द्वितीया</span>
-                        <span class="evt-row red-text">जगन्नाथ रथयात्रा</span>
+                        <span class="evt-row">रम्भा तीज</span>
+                        <span class="evt-row blue-text">महाराणा प्रताप जयंती</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">18</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल तृतीया</span>
-                        <span class="evt-row">विवाह मुहूर्त</span>
+                        <span class="evt-row">विनायकी चतुर्थी</span>
+                        <span class="evt-row">झाँसी की रानी बलिदान</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">19</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल चतुर्थी</span>
-                        <span class="evt-row">विनायक चतुर्थी</span>
+                        <span class="evt-row">शुक्ल पंचमी</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">20</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल पंचमी</span>
-                        <span class="evt-row">स्कन्द पंचमी</span>
+                        <span class="evt-row">शुक्ल षष्ठी</span>
+                        <span class="evt-row blue-text">विंध्यवासिनी पूजा</span>
                     </div>
                 </div>
 
                 <div class="date-cell sunday holiday" style="background:#e3f2fd;">
                     <div class="num">21</div>
+                    <img src="https://www.happykarma.in/cdn/shop/articles/yoga_main.jpg?v=1718714166" alt="Yoga Day" class="evt-thumb">
                     <div class="events">
-                        <span class="evt-row blue-text" style="font-weight:bold;">अंतर्राष्ट्रीय योग दिवस</span>
-                        <span class="evt-row">फादर्स डे (Father's Day)</span>
-                        <span class="evt-row">शुक्ल षष्ठी</span>
+                        <span class="evt-row red-text" style="font-weight:bold;">अंतर्राष्ट्रीय योग दिवस</span>
+                        <span class="evt-row">फादर्स डे</span>
+                        <span class="evt-row">शुक्ल सप्तमी</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">22</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल सप्तमी</span>
-                        <span class="evt-row">विवस्वत सप्तमी</span>
+                        <span class="evt-row">शुक्ल अष्टमी</span>
+                        <span class="evt-row">धूमावती जयंती</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">23</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल अष्टमी</span>
-                        <span class="evt-row red-text">दुर्गा अष्टमी</span>
+                        <span class="evt-row red-text">महेश नवमी</span>
+                        <span class="evt-row">श्यामा प्रसाद मुखर्जी बलिदान</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">24</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल नवमी</span>
-                        <span class="evt-row">भड़ली नवमी (गुप्त)</span>
+                        <span class="evt-row red-text" style="font-size:1.1rem; font-weight:bold;">गंगा दशहरा</span>
+                        <span class="evt-row blue-text">गायत्री जयंती</span>
+                        <span class="evt-row">रानी दुर्गावती ज.</span>
+                    </div>
+                </div>
+
+                <div class="date-cell holiday" style="background:#fffde7;">
+                    <div class="num">25</div>
+                    <div class="events">
+                        <span class="evt-row red-text highlight-box" style="font-weight:bold;">निर्जला एकादशी</span>
+                        <span class="evt-row">(भीमसेनी ग्यारस)</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
-                    <div class="num">25</div>
-                    <div class="events">
-                        <span class="evt-row">शुक्ल दशमी</span>
-                        <span class="evt-row blue-text">अंतिम विवाह मुहूर्त</span>
-                    </div>
-                </div>
-
-                <div class="date-cell holiday" style="background:#ffebee;">
                     <div class="num">26</div>
                     <div class="events">
-                        <span class="evt-row red-text" style="font-size:1.1rem; font-weight:bold;">देवशयनी एकादशी</span>
-                        <span class="evt-row blue-text">चातुर्मास प्रारंभ</span>
-                        <span class="evt-row">(मांगलिक कार्य बंद)</span>
+                        <span class="evt-row red-text">मोहर्रम (ताजिया)</span>
+                        <span class="evt-row">योगिनी एकादशी (स्मार्त)</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">27</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल द्वादशी</span>
-                        <span class="evt-row">वामन द्वादशी</span>
-                        <span class="evt-row">प्रदोष व्रत</span>
+                        <span class="evt-row">शुक्ल त्रयोदशी</span>
+                        <span class="evt-row red-text">प्रदोष व्रत</span>
                     </div>
                 </div>
 
                 <div class="date-cell sunday">
                     <div class="num">28</div>
                     <div class="events">
-                        <span class="evt-row">शुक्ल त्रयोदशी</span>
-                        <span class="evt-row">जया पार्वती व्रत शुरू</span>
+                        <span class="evt-row">शुक्ल चतुर्दशी</span>
                     </div>
                 </div>
 
-                <div class="date-cell">
+                <div class="date-cell holiday" style="background:#ffebee;">
                     <div class="num">29</div>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNGneo8QmR_YmE4WhJN2FGjGM53Ek3VoYMqs3J53MVJSTNDucpPgpTbKdHtaZAV4T2WtclRKprvkKBJ3CHzq6ZTxObsKB3PaKhMcHzNg&s=10" alt="Kabir Das" class="evt-thumb">
                     <div class="events">
-                        <span class="evt-row red-text highlight-box">आषाढ़ पूर्णिमा</span>
-                        <span class="evt-row">गुरु पूर्णिमा</span>
-                        <span class="evt-row">कोकिला व्रत</span>
+                        <span class="evt-row red-text" style="font-weight:bold;">संत कबीर जयंती</span>
+                        <span class="evt-row highlight-box">वट सावित्री (पूर्णिमा)</span>
+                        <span class="evt-row">स्नानदान पूर्णिमा</span>
                     </div>
                 </div>
 
                 <div class="date-cell">
                     <div class="num">30</div>
+                    <img src="https://dvncorestorageprod.blob.core.windows.net/files/page/81/Image/desktop-wallpaper-than-sri-guru-hargobind-sahib-ji-guru-hargobind-sahib-ji_20231115110541548.jpg" alt="Guru Hargobind" class="evt-thumb">
                     <div class="events">
-                        <span class="evt-row">श्रावण कृष्ण प्रतिपदा</span>
-                        <span class="evt-row blue-text">सावन मास शुरू (उत्तर)</span>
+                        <span class="evt-row blue-text">गुरु हरगोबिंद जयंती</span>
+                        <span class="evt-row">आषाढ़ कृष्ण प्रतिपदा</span>
+                        <span class="evt-row">हलहारिणी अमावस्या</span>
                     </div>
                 </div>
                 
-                <div class="date-cell" style="background:transparent; border:none;"></div>
-                <div class="date-cell" style="background:transparent; border:none;"></div>
                 <div class="date-cell" style="background:transparent; border:none;"></div>
                 <div class="date-cell" style="background:transparent; border:none;"></div>
 
@@ -537,18 +544,18 @@
                     <div class="box-head">राशिफल (जून 2026)</div>
                     <div class="box-content">
                         <ul class="rashi-list" style="padding-left:0; list-style:none; font-size:0.85rem;">
-                            <li><span class="rashi-name">मेष:</span> धन का आगमन, पराक्रम में वृद्धि।</li>
-                            <li><span class="rashi-name">वृषभ:</span> वाणी पर संयम रखें, कुटुंब में विवाद।</li>
-                            <li><span class="rashi-name">मिथुन:</span> सूर्य का आगमन, स्वास्थ्य अच्छा रहेगा।</li>
-                            <li><span class="rashi-name">कर्क:</span> विदेश यात्रा के योग, खर्च बढ़ेगा।</li>
-                            <li><span class="rashi-name">सिंह:</span> आय के स्रोत बढ़ेंगे, शुभ समाचार।</li>
-                            <li><span class="rashi-name">कन्या:</span> नौकरी में तरक्की, अधिकारियों का साथ।</li>
-                            <li><span class="rashi-name">तुला:</span> भाग्य प्रबल, धार्मिक यात्रा के योग।</li>
-                            <li><span class="rashi-name">वृश्चिक:</span> वाहन सावधानी से चलाएं, चोट का भय।</li>
-                            <li><span class="rashi-name">धनु:</span> दांपत्य जीवन में मधुरता, व्यापार लाभ।</li>
-                            <li><span class="rashi-name">मकर:</span> शत्रु परास्त होंगे, कोर्ट केस में जीत।</li>
-                            <li><span class="rashi-name">कुंभ:</span> संतान पक्ष से चिंता, शिक्षा में सुधार।</li>
-                            <li><span class="rashi-name">मीन:</span> माता का सुख, प्रॉपर्टी लेने के योग।</li>
+                            <li><span class="rashi-name">मेष:</span> धन लाभ, स्वास्थ्य उत्तम।</li>
+                            <li><span class="rashi-name">वृषभ:</span> कार्यक्षेत्र में सफलता, यात्रा योग।</li>
+                            <li><span class="rashi-name">मिथुन:</span> सूर्य का गोचर, मान-सम्मान।</li>
+                            <li><span class="rashi-name">कर्क:</span> खर्च बढ़ेगा, धार्मिक कार्य।</li>
+                            <li><span class="rashi-name">सिंह:</span> आय में वृद्धि, पदोन्नति।</li>
+                            <li><span class="rashi-name">कन्या:</span> नौकरी में बदलाव, सफलता।</li>
+                            <li><span class="rashi-name">तुला:</span> भाग्य साथ देगा, शुभ समाचार।</li>
+                            <li><span class="rashi-name">वृश्चिक:</span> सावधानी रखें, वाहन धीरे चलाएं।</li>
+                            <li><span class="rashi-name">धनु:</span> व्यापार में लाभ, दांपत्य सुख।</li>
+                            <li><span class="rashi-name">मकर:</span> शत्रु परास्त, कोर्ट में जीत।</li>
+                            <li><span class="rashi-name">कुंभ:</span> संतान पक्ष से खुशी, शिक्षा लाभ।</li>
+                            <li><span class="rashi-name">मीन:</span> माता का सुख, संपत्ति क्रय।</li>
                         </ul>
                     </div>
                 </div>
@@ -556,9 +563,9 @@
                 <div class="box">
                     <div class="box-head red">बाजार तेजी-मंदी</div>
                     <div class="box-content tight-text">
-                        <strong>सोना/चांदी:</strong> 26 जून (देवशयनी) के बाद मांग घटने से नरमी आएगी।<br>
-                        <strong>शेयर बाजार:</strong> मानसून की खबर से एग्री-स्टॉक्स में तेजी।<br>
-                        <strong>गुड़/खांड:</strong> भाव में तेजी रहने की संभावना।
+                        <strong>सोना/चांदी:</strong> अधिक मास खत्म होते ही मांग बढ़ेगी, भाव तेज होंगे।<br>
+                        <strong>शेयर बाजार:</strong> मानसून के आगमन से बाजार में उछाल।<br>
+                        <strong>अनाज:</strong> गेहूं और चावल में स्थिरता रहेगी।
                     </div>
                 </div>
 
@@ -571,9 +578,9 @@
                 </div>
 
                 <div class="box">
-                    <div class="box-head red">खेती-बाड़ी (कृषि)</div>
+                    <div class="box-head red">स्वास्थ्य (वर्षा ऋतु)</div>
                     <div class="box-content tight-text">
-                        मानसून का आगमन। धान की नर्सरी तैयार करें। मक्का और ज्वार की बुवाई के लिए खेत तैयार करें। कीटनाशकों का छिड़काव समय पर करें।
+                        वर्षा ऋतु शुरू होने वाली है। पानी उबालकर पिएं। बासी भोजन से बचें। मच्छरों से बचाव रखें।
                     </div>
                 </div>
 
@@ -581,12 +588,13 @@
                     <div class="box-head blue">जून के मुख्य त्यौहार</div>
                     <div class="box-content tight-text">
                         <ul style="padding-left:15px; margin:0; font-size:0.9rem; line-height:1.6;">
-                            <li>11: योगिनी एकादशी</li>
-                            <li>15: मिथुन संक्रांति</li>
-                            <li>17: जगन्नाथ रथयात्रा</li>
+                            <li>11: कमला एकादशी (अधिक)</li>
+                            <li>15: अधिक मास समाप्त</li>
                             <li>21: योग दिवस</li>
-                            <li>26: देवशयनी एकादशी</li>
-                            <li>29: गुरु पूर्णिमा</li>
+                            <li>24: गंगा दशहरा</li>
+                            <li>25: निर्जला एकादशी</li>
+                            <li>26: मोहर्रम</li>
+                            <li>29: कबीर जयंती</li>
                         </ul>
                     </div>
                 </div>
@@ -594,14 +602,13 @@
         </div>
 
         <div class="footer-list">
-            <div class="f-item"><span style="color:red; font-weight:bold;">11:</span> योगिनी एकादशी</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">11:</span> कमला एकादशी</div>
             <div class="f-item"><span style="color:red; font-weight:bold;">15:</span> मिथुन संक्रांति</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">16:</span> गुप्त नवरात्रि</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">17:</span> रथयात्रा</div>
             <div class="f-item"><span style="color:red; font-weight:bold;">21:</span> योग दिवस</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">26:</span> देवशयनी एकादशी</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">29:</span> गुरु पूर्णिमा</div>
-            <div class="f-item"><span style="color:red; font-weight:bold;">30:</span> सावन शुरू</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">24:</span> गंगा दशहरा</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">25:</span> निर्जला एकादशी</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">26:</span> मोहर्रम</div>
+            <div class="f-item"><span style="color:red; font-weight:bold;">29:</span> कबीर जयंती</div>
         </div>
     </div>
 
