@@ -117,6 +117,33 @@
             display: inline-block;
         }
 
+        /* ================= CLOCK STYLES (ADDED) ================= */
+        .clock-wrapper {
+            text-align: center;
+            margin: 5px 0 10px 0;
+            padding: 8px 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px dashed rgba(255, 215, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .live-time {
+            font-family: 'Rozha One', serif;
+            font-size: 1.8rem;
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+            letter-spacing: 1px;
+        }
+
+        .live-date {
+            font-family: 'Tiro Devanagari Hindi', serif;
+            font-size: 1rem;
+            color: var(--cream);
+            margin-top: -5px;
+            font-weight: 600;
+        }
+
         /* ================= BUTTONS (Links) ================= */
 
         .months-wrapper {
@@ -267,6 +294,10 @@
             <div class="sub-heading">सनातन धर्म हेतु</div>
         </div>
 
+        <div class="clock-wrapper">
+            <div id="clock-time" class="live-time">--:--:--</div>
+            <div id="clock-date" class="live-date">...</div>
+        </div>
         <div class="months-wrapper">
             <div class="month-grid">
                 <a href="jan.html" class="month-btn">जनवरी</a>
@@ -307,6 +338,29 @@
         </div>
 
     </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date();
+            
+            // Time logic (English numerals)
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            const timeString = now.toLocaleTimeString('en-US', timeOptions);
+            
+            // Date logic (Hindi format)
+            const dateOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateString = now.toLocaleDateString('hi-IN', dateOptions);
+
+            document.getElementById('clock-time').textContent = timeString;
+            document.getElementById('clock-date').textContent = dateString;
+        }
+
+        // Update every second
+        setInterval(updateClock, 1000);
+        
+        // Run immediately so no delay on load
+        updateClock();
+    </script>
 
 </body>
 </html>
