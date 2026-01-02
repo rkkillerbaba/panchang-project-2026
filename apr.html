@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=1400, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>अप्रैल 2026 - पंचांग (सही फोटो अनुसार)</title>
+    <title>अप्रैल 2026 - पंचांग (चित्र सहित)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -29,7 +29,6 @@
 
         .calendar-wrapper {
             width: 1360px;
-            /* 5 rows fit comfortably in this height */
             min-height: 1050px; 
             margin: 0 auto;
             background-color: var(--bg-paper);
@@ -113,11 +112,10 @@
         .rashi-list li { margin-bottom: 5px; border-bottom: 1px dotted #ccc; padding-bottom: 2px; }
         .rashi-name { font-weight: bold; color: #d84315; }
 
-        /* CALENDAR GRID - APRIL SETTINGS */
+        /* CALENDAR GRID */
         .cal-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            /* 5 हफ्ते, 195px हाइट */
             grid-template-rows: 45px repeat(5, 195px); 
             background: #ffcc80;
             gap: 2px;
@@ -131,7 +129,7 @@
         .date-cell {
             background: #fff;
             height: 100%; 
-            padding: 8px;
+            padding: 5px; /* Reduced padding for space */
             position: relative;
             display: flex;
             flex-direction: column;
@@ -145,33 +143,51 @@
 
         .num {
             font-family: 'Oswald', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3rem; /* Slightly smaller */
             font-weight: 700;
             color: #333;
             text-align: right;
-            line-height: 0.9;
+            line-height: 1;
             position: absolute;
-            top: 5px;
-            right: 10px;
+            top: 2px;
+            right: 5px;
             z-index: 2;
         }
         .sunday .num { color: #b71c1c; }
 
+        /* IMAGE STYLES */
+        .evt-thumb {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%; /* Circular Image */
+            border: 2px solid var(--saffron);
+            margin-top: 5px;
+            margin-left: 5px;
+            z-index: 1;
+            opacity: 1;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            background: #fff;
+        }
+
         .events {
-            margin-top: 55px;
-            font-size: 0.9rem;
+            margin-top: auto; /* Push events to bottom */
+            font-size: 0.85rem;
             font-weight: 600;
             z-index: 5;
             position: relative;
+            padding-bottom: 2px;
         }
         
-        .evt-row { display: block; margin-top: 4px; line-height: 1.25; border-left: 3px solid transparent; padding-left: 4px; }
+        .evt-row { display: block; margin-top: 2px; line-height: 1.2; border-left: 3px solid transparent; padding-left: 3px; }
         .evt-row.red-text { border-left-color: #d50000; }
         .evt-row.blue-text { border-left-color: #0d47a1; }
         
         .red-text { color: #d50000; }
         .blue-text { color: #0d47a1; }
         .saffron-text { color: #e65100; }
+        
+        .highlight-box { background: #fffde7; padding: 1px 4px; border-radius: 3px; }
 
         /* FOOTER */
         .footer-list {
@@ -188,7 +204,6 @@
 
         /* Helpers */
         .tight-text { font-size: 0.85rem; }
-        .highlight-box { background: #fffde7; padding: 2px 5px; border-radius: 3px; }
 
     </style>
 </head>
@@ -300,6 +315,7 @@
 
                 <div class="date-cell holiday" style="background:#fffde7;">
                     <div class="num">2</div>
+                    <img src="https://i0.wp.com/hindupost.in/wp-content/uploads/2023/04/Sri-Hanuman-1.jpg?w=777&ssl=1" alt="Hanuman Ji" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row red-text" style="font-size:1.1rem; font-weight:bold;">हनुमान जयंती</span>
                         <span class="evt-row">स्नानदान पूर्णिमा</span>
@@ -339,6 +355,7 @@
 
                 <div class="date-cell">
                     <div class="num">7</div>
+                    <img src="https://dvncorestorageprod.blob.core.windows.net/files/page/61/Image/GuruTeghBahadurSahibbySobhaSinghArt-webistemaindropshadow_1135x_20231101071233682.jpg" alt="Guru Tegh Bahadur" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row blue-text">गुरु तेगबहादुर ज.</span>
                         <span class="evt-row">कृष्ण पंचमी</span>
@@ -371,6 +388,7 @@
 
                 <div class="date-cell">
                     <div class="num">11</div>
+                    <img src="https://currentaffairs.adda247.com/wp-content/uploads/multisite/sites/5/2023/04/11130723/Jyotirao-Phule-1-1280x720-1.jpg" alt="Jyotiba Phule" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row blue-text">M. जोतीराव फुले ज.</span>
                         <span class="evt-row">कृष्ण नवमी</span>
@@ -395,6 +413,7 @@
 
                 <div class="date-cell holiday" style="background:#fffde7;">
                     <div class="num">14</div>
+                    <img src="https://archives.vsktelangana.org/wp-content/uploads/2022/04/amdedkar.jpg" alt="Dr Ambedkar" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row red-text highlight-box">डॉ. अम्बेडकर जयंती</span>
                         <span class="evt-row blue-text" style="font-weight:bold;">★ मेष संक्रांति</span>
@@ -438,6 +457,7 @@
 
                 <div class="date-cell sunday">
                     <div class="num">19</div>
+                    <img src="https://images.indianexpress.com/2025/04/Parshuram-Jayanti-2025.jpg?w=1200" alt="Parshuram" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row red-text">भगवान परशुराम ज.</span>
                         <span class="evt-row">शुक्ल द्वितीया</span>
@@ -446,6 +466,7 @@
 
                 <div class="date-cell holiday" style="background:#ffebee;">
                     <div class="num">20</div>
+                    <img src="https://m.media-amazon.com/images/I/610-P+s5eKL._AC_UF894,1000_QL80_FMwebp_.jpg" alt="Akshaya Tritiya" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row red-text" style="font-size:1.2rem; font-weight:bold;">★ अक्षय तृतीया</span>
                         <span class="evt-row highlight-box">अबूझ सावा</span>
@@ -463,6 +484,7 @@
 
                 <div class="date-cell">
                     <div class="num">22</div>
+                    <img src="https://www.amritapuri.org/images/2000/04/adi-shankara.jpg" alt="Adi Shankaracharya" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row blue-text">आद्य शंकराचार्य ज.</span>
                         <span class="evt-row">शुक्ल पंचमी</span>
@@ -471,6 +493,7 @@
 
                 <div class="date-cell">
                     <div class="num">23</div>
+                    <img src="https://i.pinimg.com/564x/41/7d/24/417d24d0e3e38595ae14accb593d4571.jpg" alt="Chitragupta" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row red-text">गंगा सप्तमी</span>
                         <span class="evt-row">चित्रगुप्त प्राकट्योत्सव</span>
@@ -487,6 +510,7 @@
 
                 <div class="date-cell">
                     <div class="num">25</div>
+                    <img src="https://img.freepik.com/premium-vector/portrait-queen-vanvasi-sita-seeta_156779-828.jpg" alt="Sita Navami" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row red-text">जानकी (सीता) नवमी</span>
                         <span class="evt-row">संत भूरा भगत ज.</span>
@@ -527,6 +551,7 @@
 
                 <div class="date-cell">
                     <div class="num">30</div>
+                    <img src="https://www.hlimg.com/images/events/738X538/a_1527838589e.jpg?w=400&dpr=2.5" alt="Narasimha / Guru Amardas" class="evt-thumb">
                     <div class="events">
                         <span class="evt-row red-text">नृसिंह चतुर्दशी</span>
                         <span class="evt-row">गुरु अमरदास जयंती</span>
